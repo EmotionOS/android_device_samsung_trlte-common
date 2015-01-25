@@ -1506,8 +1506,8 @@ on property:sys.boot_completed=1
     write /sys/module/cpu_boost/parameters/plug_boost_ms 5
 
     # permissions for S-Pen
-    chmod 0660 /sys/class/input/input20/enabled
-    chown system system /sys/class/input/input20/enabled
+    chmod 0660 /sys/class/input/input18/enabled
+    chown system system /sys/class/input/input18/enabled
     chown system radio /sys/class/sec/sec_epen/epen_firm_update
     chown system radio /sys/class/sec/sec_epen/epen_reset
     chown system radio /sys/class/sec/sec_epen/epen_reset_result
