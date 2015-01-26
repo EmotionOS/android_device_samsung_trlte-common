@@ -710,16 +710,16 @@ on boot
     chown radio system /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
     chmod 664  /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
 
-    chown radio system /sys/class/devfreq/qcom,cpubw.43/available_frequencies
-    chmod 664 /sys/class/devfreq/qcom,cpubw.43/available_frequencies
-    chown radio system /sys/class/devfreq/qcom,cpubw.43/available_governors
-    chmod 664 /sys/class/devfreq/qcom,cpubw.43/available_governors
-    chown radio system /sys/class/devfreq/qcom,cpubw.43/governor
-    chmod 664 /sys/class/devfreq/qcom,cpubw.43/governor
-    chown radio system /sys/class/devfreq/qcom,cpubw.43/max_freq
-    chmod 664 /sys/class/devfreq/qcom,cpubw.43/max_freq
-    chown radio system /sys/class/devfreq/qcom,cpubw.43/min_freq
-    chmod 664 /sys/class/devfreq/qcom,cpubw.43/min_freq
+    chown radio system /sys/class/devfreq/0.qcom,cpubw/available_frequencies
+    chmod 664 /sys/class/devfreq/0.qcom,cpubw/available_frequencies
+    chown radio system /sys/class/devfreq/0.qcom,cpubw/available_governors
+    chmod 664 /sys/class/devfreq/0.qcom,cpubw/available_governors
+    chown radio system /sys/class/devfreq/0.qcom,cpubw/governor
+    chmod 664 /sys/class/devfreq/0.qcom,cpubw/governor
+    chown radio system /sys/class/devfreq/0.qcom,cpubw/max_freq
+    chmod 664 /sys/class/devfreq/0.qcom,cpubw/max_freq
+    chown radio system /sys/class/devfreq/0.qcom,cpubw/min_freq
+    chmod 664 /sys/class/devfreq/0.qcom,cpubw/min_freq
 
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
@@ -1206,18 +1206,6 @@ service gsiff_daemon /system/bin/gsiff_daemon
     user system
     group gps qcom_oncrpc net_raw
 
-service qrngd /system/bin/qrngd -f
-    class main
-    user root
-    group root
-
-service qrngp /system/bin/qrngp
-    class main
-    user root
-    group root
-    oneshot
-    disabled
-
 service qseecomd /system/bin/qseecomd
     class late_start
     user root
@@ -1258,9 +1246,6 @@ service qmuxd /system/bin/qmuxd
     user radio
     group radio audio bluetooth gps qcom_diag log
 
-service netmgrd /system/bin/netmgrd
-    class main
-
 service mdm_helper /system/bin/mdm_helper
     class core
     onrestart setprop ro.service.mdm_helper_restarted "true"
@@ -1279,35 +1264,6 @@ on property:ro.baseband=mdm
 # Start mdm_helper_proxy
 on property:ro.mdm_helper_proxy_req=true
     start mdm_helper_proxy
-
-# IPSec for VOLTE
-service ipsec-daemon /system/bin/IPSecService
-    class main
-    socket ipsec_socket stream 660 system system
-    user system
-    group system net_raw inet net_admin
-
-service DR-daemon /system/bin/ddexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service SMD-daemon /system/bin/smdexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service BCS-daemon /system/bin/connfwexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service SIDESYNC_service /system/bin/ss_conn_daemon
-    class main
-    socket ss_conn_daemon stream 0666 system system
-    user system
-    group inet net_raw
-
 
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -1392,18 +1348,6 @@ service dhcpcd_bnep3 /system/bin/dhcpcd -BKLG
 service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
     disabled
     oneshot
-
-service olsrd /system/bin/olsrd -f /etc/wifi/olsrd.conf
-    class main
-    disabled
-    oneshot
-
-#gps services
-service gpsone_daemon /system/bin/gpsone_daemon
-    class late_start
-    user gps
-    group gps inet net_raw
-    disabled
 
 on property:init.svc.macloader=stopped
     chown system root /data/.cid.info
@@ -1523,7 +1467,6 @@ on property:sys.boot_completed=1
 
     # Post boot services
     start mpdecision
-    start qrngp
 
 service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     class late_start
@@ -1564,20 +1507,6 @@ service hcidump /system/bin/sh /system/etc/hcidump.sh
     group bluetooth system net_bt_admin net_admin
     disabled
     oneshot
-
-service prepare-mobicore /system/bin/mcStarter tbase300
-	class core
-	user root
-	group root
-	oneshot
-
-service run-mobicore /system/bin/sh /system/bin/mobicore-startup.sh
-	class core
-	user system
-	group system
-
-on property:init.svc.bootanim=stopped
-	start run-mobicore
 
 on property:persist.sys.ssr.restart_level=1
     write /sys/module/subsystem_restart/parameters/restart_level 1
