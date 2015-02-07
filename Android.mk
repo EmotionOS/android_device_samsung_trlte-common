@@ -19,7 +19,7 @@ LOCAL_PATH := $(call my-dir)
 ifeq ($(BOARD_VENDOR),samsung)
 ifeq ($(TARGET_BOARD_PLATFORM),apq8084)
 
-ifneq ($(filter trlte trltetmo trltecan trltespr trlteusc,$(TARGET_DEVICE)),)
+ifneq ($(filter trlte trltetmo trltecan trltespr trlteusc trlteeur,$(TARGET_DEVICE)),)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
 
