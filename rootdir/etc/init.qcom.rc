@@ -1267,6 +1267,11 @@ on property:init.svc.ril-daemon=running
 on property:ro.baseband=mdm
 	start mdm_helper
 
+on property:ro.baseband=mdm2
+    insmod /system/lib/modules/mhi.ko
+    write /dev/kmsg "insmod mhi.ko"
+    start mdm_helper
+
 # Start mdm_helper_proxy
 on property:ro.mdm_helper_proxy_req=true
     start mdm_helper_proxy
