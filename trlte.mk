@@ -94,9 +94,6 @@ PRODUCT_PACKAGES += \
     mixer_paths.xml \
     tinymix
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.audio.monitorRotation=true
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
