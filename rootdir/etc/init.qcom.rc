@@ -238,6 +238,12 @@ on post-fs-data
     mkdir /data/fota 0771
     chown system system /data/fota
 
+    #Create PERFD deamon related dirs
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
+    mkdir /data/system/perfd 0770 root system
+    chmod 2770 /data/system/perfd
+
     #Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
 
@@ -250,6 +256,10 @@ on post-fs-data
     mkdir /data/bluetooth 0770 bluetooth bluetooth
     # Enable the setgid bit on the directory
     chmod 2770 /data/bluetooth
+
+    # NFC local data and nfcee xml storage
+    mkdir /data/nfc 0770 nfc nfc
+    mkdir /data/nfc/param 0770 nfc nfc
 
     mkdir /data/audio/ 0770 media audio
 
@@ -573,12 +583,6 @@ on boot
     chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
-
-    #Create PERFD deamon related dirs
-    mkdir /data/misc/perfd 0755 root system
-    chmod 2755 /data/misc/perfd
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
 
     setprop wifi.interface wlan0
 
@@ -1043,10 +1047,6 @@ on boot
     chown system radio /sys/class/sensors/gesture_sensor/ir_current
     chown system radio /sys/class/sensors/gesture_sensor/selftest
 
-    # SHTC1 BULK
-    chmod 0600 /dev/shtc1_sensor
-    chown system system /dev/shtc1_sensor
-
     # Permissions for SSRM
     chmod 0664 /sys/devices/platform/sec-thermistor/temperature
     chmod 0664 /sys/class/power_supply/battery/siop_level
@@ -1067,16 +1067,6 @@ on boot
     chmod 0660 /dev/pn547
     chown nfc nfc /dev/pn547
     symlink /dev/pn547 /dev/pn544
-
-    # NFC_BROADCOM
-    chmod 0600 /dev/bcm2079x
-    chown nfc nfc /dev/bcm2079x
-    mkdir /data/nfc
-    mkdir /data/nfc/param
-    chmod 0700 /data/nfc
-    chmod 0700 /data/nfc/param
-    chown nfc nfc /data/nfc
-    chown nfc nfc /data/nfc/param
 
     # NFC_SEC
     chmod 0660 /dev/sec-nfc
@@ -1213,9 +1203,9 @@ service gsiff_daemon /system/bin/gsiff_daemon
     group gps qcom_oncrpc net_raw
 
 service qseecomd /system/bin/qseecomd
-    class late_start
+    class core
     user root
-    group system
+    group root
 
 service mpdecision /system/bin/mpdecision --avg_comp
     class main
@@ -1250,7 +1240,7 @@ service rfs_access /system/bin/rfs_access
 
 service qmuxd /system/bin/qmuxd
     class core
-    user radio
+    user root
     group radio audio bluetooth gps qcom_diag log
 
 service mdm_helper /system/bin/mdm_helper
