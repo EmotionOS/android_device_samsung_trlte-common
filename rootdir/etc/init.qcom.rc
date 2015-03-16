@@ -559,6 +559,8 @@ on boot
     chown system graphics /sys/class/graphics/fb1/hdcp_present
     chown system graphics /sys/class/graphics/fb1/hdmi_mode
     chmod 0660 /sys/class/graphics/fb1/power_state
+
+    # LiveDisplay
     chown system system /sys/devices/virtual/graphics/fb0/rgb
     chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
 
