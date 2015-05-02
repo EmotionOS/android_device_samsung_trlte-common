@@ -874,7 +874,7 @@
 	<!-- Recording Scenario  -->
 	<path name="rec-main-mic">
 		<path name="main-mic" />
-		<ctl name="DEC2 Volume" value="90" />
+		<ctl name="DEC2 Volume" value="106" />
 	</path>
 
 	<path name="rec-sub-mic">
