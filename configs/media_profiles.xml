@@ -556,7 +556,9 @@
         minBitRate="64000" maxBitRate="100000000"
         minFrameWidth="176" maxFrameWidth="3840"
         minFrameHeight="144" maxFrameHeight="2160"
-        minFrameRate="15" maxFrameRate="30" />
+        minFrameRate="15" maxFrameRate="120"
+        maxHFRFrameWidth="1920" maxHFRFrameHeight="1080"
+        maxHFRMode="120" />
 
     <VideoEncoderCap name="h263" enabled="true"
         minBitRate="64000" maxBitRate="2000000"
