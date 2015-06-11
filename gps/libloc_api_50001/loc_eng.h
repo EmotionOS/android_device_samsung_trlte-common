@@ -88,9 +88,11 @@ typedef struct loc_eng_data_s
     agps_status_extended           agps_status_cb;
     gps_nmea_callback              nmea_cb;
     gps_ni_notify_callback         ni_notify_cb;
+    gps_set_capabilities           set_capabilities_cb;
     gps_acquire_wakelock           acquire_wakelock_cb;
     gps_release_wakelock           release_wakelock_cb;
     gps_request_utc_time           request_utc_time_cb;
+    gps_measurement_callback       gps_measurement_cb;
     boolean                        intermediateFix;
     AGpsStatusValue                agps_status;
     loc_eng_xtra_data_s_type       xtra_module_data;
@@ -137,33 +139,44 @@ typedef struct loc_eng_data_s
 } loc_eng_data_s_type;
 
 /* GPS.conf support */
+/* NOTE: the implementaiton of the parser casts number
+   fields to 32 bit. To ensure all 'n' fields working,
+   they must all be 32 bit fields. */
 typedef struct loc_gps_cfg_s
 {
-    unsigned long  INTERMEDIATE_POS;
-    unsigned long  ACCURACY_THRES;
-    unsigned long  SUPL_VER;
-    unsigned long  CAPABILITIES;
-    unsigned long  QUIPC_ENABLED;
-    unsigned long  LPP_PROFILE;
-    uint8_t        NMEA_PROVIDER;
-    unsigned long  A_GLONASS_POS_PROTOCOL_SELECT;
+    uint32_t       INTERMEDIATE_POS;
+    uint32_t       ACCURACY_THRES;
+    uint32_t       SUPL_VER;
+    uint32_t       CAPABILITIES;
+    uint32_t       LPP_PROFILE;
+    uint32_t       NMEA_PROVIDER;
+    uint32_t       GPS_LOCK;
+    uint32_t       A_GLONASS_POS_PROTOCOL_SELECT;
+    uint32_t       AGPS_CERT_WRITABLE_MASK;
 } loc_gps_cfg_s_type;
 
+/* NOTE: the implementaiton of the parser casts number
+   fields to 32 bit. To ensure all 'n' fields working,
+   they must all be 32 bit fields. */
+/* Meanwhile, *_valid fields are 8 bit fields, and 'f'
+   fields are double. Rigid as they are, it is the
+   the status quo, until the parsing mechanism is
+   change, that is. */
 typedef struct
 {
     uint8_t        GYRO_BIAS_RANDOM_WALK_VALID;
     double         GYRO_BIAS_RANDOM_WALK;
-    unsigned long  SENSOR_ACCEL_BATCHES_PER_SEC;
-    unsigned long  SENSOR_ACCEL_SAMPLES_PER_BATCH;
-    unsigned long  SENSOR_GYRO_BATCHES_PER_SEC;
-    unsigned long  SENSOR_GYRO_SAMPLES_PER_BATCH;
-    unsigned long  SENSOR_ACCEL_BATCHES_PER_SEC_HIGH;
-    unsigned long  SENSOR_ACCEL_SAMPLES_PER_BATCH_HIGH;
-    unsigned long  SENSOR_GYRO_BATCHES_PER_SEC_HIGH;
-    unsigned long  SENSOR_GYRO_SAMPLES_PER_BATCH_HIGH;
-    unsigned long  SENSOR_CONTROL_MODE;
-    unsigned long  SENSOR_USAGE;
-    unsigned long  SENSOR_ALGORITHM_CONFIG_MASK;
+    uint32_t       SENSOR_ACCEL_BATCHES_PER_SEC;
+    uint32_t       SENSOR_ACCEL_SAMPLES_PER_BATCH;
+    uint32_t       SENSOR_GYRO_BATCHES_PER_SEC;
+    uint32_t       SENSOR_GYRO_SAMPLES_PER_BATCH;
+    uint32_t       SENSOR_ACCEL_BATCHES_PER_SEC_HIGH;
+    uint32_t       SENSOR_ACCEL_SAMPLES_PER_BATCH_HIGH;
+    uint32_t       SENSOR_GYRO_BATCHES_PER_SEC_HIGH;
+    uint32_t       SENSOR_GYRO_SAMPLES_PER_BATCH_HIGH;
+    uint32_t       SENSOR_CONTROL_MODE;
+    uint32_t       SENSOR_USAGE;
+    uint32_t       SENSOR_ALGORITHM_CONFIG_MASK;
     uint8_t        ACCEL_RANDOM_WALK_SPECTRAL_DENSITY_VALID;
     double         ACCEL_RANDOM_WALK_SPECTRAL_DENSITY;
     uint8_t        ANGLE_RANDOM_WALK_SPECTRAL_DENSITY_VALID;
@@ -172,6 +185,7 @@ typedef struct
     double         RATE_RANDOM_WALK_SPECTRAL_DENSITY;
     uint8_t        VELOCITY_RANDOM_WALK_SPECTRAL_DENSITY_VALID;
     double         VELOCITY_RANDOM_WALK_SPECTRAL_DENSITY;
+    uint32_t       SENSOR_PROVIDER;
 } loc_sap_cfg_s_type;
 
 extern loc_gps_cfg_s_type gps_conf;
@@ -233,7 +247,18 @@ extern void loc_eng_ni_request_handler(loc_eng_data_s_type &loc_eng_data,
                                    const GpsNiNotification *notif,
                                    const void* passThrough);
 extern void loc_eng_ni_reset_on_engine_restart(loc_eng_data_s_type &loc_eng_data);
+
 int loc_eng_read_config(void);
+
+int loc_eng_agps_install_certificates(loc_eng_data_s_type &loc_eng_data,
+                                      const DerEncodedCertificate* certificates,
+                                      size_t length);
+
+void loc_eng_configuration_update (loc_eng_data_s_type &loc_eng_data,
+                                   const char* config_data, int32_t length);
+int loc_eng_gps_measurement_init(loc_eng_data_s_type &loc_eng_data,
+                                 GpsMeasurementCallbacks* callbacks);
+void loc_eng_gps_measurement_close(loc_eng_data_s_type &loc_eng_data);
 
 #ifdef __cplusplus
 }

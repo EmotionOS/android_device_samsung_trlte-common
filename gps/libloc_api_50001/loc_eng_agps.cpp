@@ -762,11 +762,12 @@ int AgpsStateMachine::sendRsrcRequest(AGpsStatusValue action) const
 
         if (s == NULL) {
             nifRequest.ipv4_addr = INADDR_NONE;
-            nifRequest.ipv6_addr[0] = 0;
+            memset(&nifRequest.addr, 0,  sizeof(nifRequest.addr));
+            nifRequest.addr.ss_family = AF_INET6;
             nifRequest.ssid[0] = '\0';
             nifRequest.password[0] = '\0';
         } else {
-            s->setIPAddresses(nifRequest.ipv4_addr, (char*)nifRequest.ipv6_addr);
+            s->setIPAddresses(nifRequest.addr);
             s->setWifiInfo(nifRequest.ssid, nifRequest.password);
         }
 

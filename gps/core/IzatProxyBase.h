@@ -1,4 +1,4 @@
-/* Copyright (c) 2009,2011,2014 The Linux Foundation. All rights reserved.
+/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
  *       copyright notice, this list of conditions and the following
  *       disclaimer in the documentation and/or other materials provided
  *       with the distribution.
- *     * Neither the name of The Linux Foundation nor the names of its
+ *     * Neither the name of The Linux Foundation, nor the names of its
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -26,34 +26,35 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+#ifndef IZAT_PROXY_BASE_H
+#define IZAT_PROXY_BASE_H
 
-#ifndef LOC_ENG_NI_H
-#define LOC_ENG_NI_H
+#include <gps_extended.h>
+#include <MsgTask.h>
 
-#include <stdbool.h>
-#include <LocEngAdapter.h>
+namespace loc_core {
 
-#define LOC_NI_NO_RESPONSE_TIME            20                      /* secs */
-#define LOC_NI_NOTIF_KEY_ADDRESS           "Address"
-#define GPS_NI_RESPONSE_IGNORE             4
+class LocApiBase;
+class LocAdapterBase;
 
-typedef struct {
-    pthread_t               thread;            /* NI thread */
-    int                     respTimeLeft;       /* examine time for NI response */
-    bool                    respRecvd;   /* NI User reponse received or not from Java layer*/
-    void*                   rawRequest;
-    int                     reqID;         /* ID to check against response */
-    GpsUserResponseType     resp;
-    pthread_cond_t          tCond;
-    pthread_mutex_t         tLock;
-    LocEngAdapter*          adapter;
-} loc_eng_ni_session_s_type;
+class IzatProxyBase {
+    friend class ContextBase;
+    inline virtual LocApiBase*
+        getLocApi(const MsgTask* msgTask,
+                  LOC_API_ADAPTER_EVENT_MASK_T exMask) const {
+        return NULL;
+    }
+protected:
+    inline IzatProxyBase() {}
+public:
+    inline virtual ~IzatProxyBase() {}
+    inline virtual void requestUlp(LocAdapterBase* adapter,
+                                   unsigned long capabilities) const {}
+    inline virtual bool hasAgpsExt() const { return false; }
+};
 
-typedef struct {
-    loc_eng_ni_session_s_type session;    /* SUPL NI Session */
-    loc_eng_ni_session_s_type sessionEs;  /* Emergency SUPL NI Session */
-    int reqIDCounter;
-} loc_eng_ni_data_s_type;
+typedef IzatProxyBase* (getIzatProxy_t)();
 
+} // namespace loc_core
 
-#endif /* LOC_ENG_NI_H */
+#endif // IZAT_PROXY_BASE_H

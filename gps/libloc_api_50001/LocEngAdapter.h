@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -98,8 +98,12 @@ public:
     inline LocInternalAdapter* getInternalAdapter() { return mInternalAdapter; }
     inline UlpProxyBase* getUlpProxy() { return mUlp; }
     inline void* getOwner() { return mOwner; }
-    inline bool hasAgpsExtendedCapabilities() { return mContext->hasAgpsExtendedCapabilities(); }
-    inline bool hasCPIExtendedCapabilities() { return mContext->hasCPIExtendedCapabilities(); }
+    inline bool hasAgpsExtendedCapabilities() {
+        return mContext->hasAgpsExtendedCapabilities();
+    }
+    inline bool hasCPIExtendedCapabilities() {
+        return mContext->hasCPIExtendedCapabilities();
+    }
     inline const MsgTask* getMsgTask() { return mMsgTask; }
 
     inline enum loc_api_adapter_err
@@ -192,9 +196,9 @@ public:
         return mLocApi->setLPPConfig(profile);
     }
     inline enum loc_api_adapter_err
-        setSensorControlConfig(int sensorUsage)
+        setSensorControlConfig(int sensorUsage, int sensorProvider)
     {
-        return mLocApi->setSensorControlConfig(sensorUsage);
+        return mLocApi->setSensorControlConfig(sensorUsage, sensorProvider);
     }
     inline enum loc_api_adapter_err
         setSensorProperties(bool gyroBiasVarianceRandomWalk_valid, float gyroBiasVarianceRandomWalk,
@@ -250,7 +254,14 @@ public:
     inline enum loc_api_adapter_err
         getZpp(GpsLocation &zppLoc, LocPosTechMask &tech_mask)
     {
-        return mLocApi->getZppFix(zppLoc, tech_mask);
+        return mLocApi->getBestAvailableZppFix(zppLoc, tech_mask);
+    }
+
+    inline virtual void installAGpsCert(const DerEncodedCertificate* pData,
+                                        size_t length,
+                                        uint32_t slotBitMask)
+    {
+        mLocApi->installAGpsCert(pData, length, slotBitMask);
     }
 
     virtual void handleEngineDownEvent();
@@ -275,6 +286,7 @@ public:
     virtual bool requestSuplES(int connHandle);
     virtual bool reportDataCallOpened();
     virtual bool reportDataCallClosed();
+    virtual void reportGpsMeasurementData(GpsData &gpsMeasurementData);
 
     inline const LocPosMode& getPositionMode() const
     {return mFixCriteria;}
@@ -308,10 +320,13 @@ public:
       3 = Lock MT position sessions
       4 = Lock all position sessions
     */
-    inline int setGpsLock(unsigned int lock)
+    inline int setGpsLock(LOC_GPS_LOCK_MASK lock)
     {
         return mLocApi->setGpsLock(lock);
     }
+
+    int setGpsLockMsg(LOC_GPS_LOCK_MASK lock);
+
     /*
       Returns
       Current value of GPS lock on success
@@ -321,6 +336,17 @@ public:
     {
         return mLocApi->getGpsLock();
     }
+
+    /*
+      Update Registration Mask
+     */
+    void updateRegistrationMask(LOC_API_ADAPTER_EVENT_MASK_T event,
+                                loc_registration_mask_status isEnabled);
+
+    /*
+      Set Gnss Constellation Config
+     */
+    bool gnssConstellationConfig();
 };
 
 #endif //LOC_API_ENG_ADAPTER_H
