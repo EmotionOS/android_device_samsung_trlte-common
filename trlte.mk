@@ -103,6 +103,10 @@ PRODUCT_PACKAGES += \
     hwcomposer.apq8084 \
     memtrack.apq8084
 
+# Doze service
+PRODUCT_PACKAGES += \
+    SamsungDoze
+
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
     fingerprint.apq8084
