@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 The CyanogenMod Project
+# Copyright (C) 2015 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -70,14 +70,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
-# GPS configuration
-PRODUCT_COPY_FILES += \
-    device/samsung/trlte-common/configs/gps.conf:system/etc/gps.conf
-
-# GPS
-PRODUCT_PACKAGES += \
-    gps.apq8084
-
 # Audio
 PRODUCT_PACKAGES += \
     audiod \
@@ -111,6 +103,10 @@ PRODUCT_PACKAGES += \
     hwcomposer.apq8084 \
     memtrack.apq8084
 
+# Doze service
+PRODUCT_PACKAGES += \
+    SamsungDoze
+
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
     fingerprint.apq8084
@@ -122,6 +118,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     gps.apq8084
 
+# GPS config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/flp.conf:/system/etc/flp.conf \
     $(LOCAL_PATH)/configs/gps.conf:/system/etc/gps.conf \
@@ -141,7 +138,7 @@ PRODUCT_COPY_FILES += \
 
 # Keystore
 PRODUCT_PACKAGES += \
-	keystore.apq8084
+    keystore.apq8084
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -172,22 +169,26 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
-# Power HAL
-PRODUCT_PACKAGES += \
-	power.apq8084
-
-# NFC PACKAGES
+# NFC packages
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     NfcNci \
     libnfc-nci \
     Tag
 
-# NFC CONFIG
+# NFC config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/libnfc-sec.conf:system/etc/libnfc-brcm.conf \
     $(LOCAL_PATH)/configs/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
     $(LOCAL_PATH)/configs/nfcee_access.xml:system/etc/nfcee_access.xml
+
+# Power HAL
+PRODUCT_PACKAGES += \
+    power.apq8084
+
+# QCOM perf lib
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 
 # Ramdisk
 PRODUCT_PACKAGES += \
@@ -203,6 +204,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Torch
 
+# WiFi packages
 PRODUCT_PACKAGES += \
     libnetcmdiface \
     macloader \
@@ -210,11 +212,7 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     wpa_supplicant
 
+# WiFi config
 PRODUCT_COPY_FILES += \
-   $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-   $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
-
-
-# QCOM Perf lib
-PRODUCT_PROPERTY_OVERRIDES += \
-   ro.vendor.extension_library=/vendor/lib/libqc-opt.so
+    $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
