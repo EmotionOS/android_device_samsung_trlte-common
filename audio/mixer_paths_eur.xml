@@ -901,8 +901,8 @@
 
 	<path name="rec-stereo-mic">
 		<path name="sub-main-mic" />
-		<ctl name="DEC2 Volume" value="89" />
-		<ctl name="DEC4 Volume" value="90" />
+		<ctl name="DEC2 Volume" value="105" />
+		<ctl name="DEC4 Volume" value="106" />
 	</path>
 
 	<path name="rec-high-gain-main-mic">
