@@ -174,6 +174,14 @@
 /sys/devices/virtual/input/input*                   poll           0660    input    system
 /sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
 
+# sensorhub
+/dev/ssp_sensorhub        0660   system     system
+/dev/iio:device*		  0660	 system	system
+/sys/devices/f9927000.spi/spi_master/spi32765/spi32765.0/iio:device*   buffer/enable 0660	  system	system
+/sys/devices/f9927000.spi/spi_master/spi32765/spi32765.0/iio:device*   buffer/length 0660	  system	system
+/sys/devices/f9927000.spi/spi_master/spi32766/spi32766.0/iio:device*   buffer/enable 0660	  system	system
+/sys/devices/f9927000.spi/spi_master/spi32766/spi32766.0/iio:device*   buffer/length 0660	  system	system
+
 # wlan
 /dev/wcnss_wlan           0660   system     system
 #nfc permissions
