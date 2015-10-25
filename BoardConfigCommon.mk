@@ -147,3 +147,4 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
+TARGET_USES_BLOCK_BASED_OTA := false
