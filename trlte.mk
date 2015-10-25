@@ -93,8 +93,8 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.apq8084 \
     libxml2
+#    camera.apq8084 \
 
 # Display
 PRODUCT_PACKAGES += \
@@ -104,8 +104,11 @@ PRODUCT_PACKAGES += \
     memtrack.apq8084
 
 # Doze service
+#PRODUCT_PACKAGES += \
+#    SamsungDoze
+
 PRODUCT_PACKAGES += \
-    SamsungDoze
+   libhealthd.default
 
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
@@ -215,4 +218,13 @@ PRODUCT_PACKAGES += \
 # WiFi config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+    $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
+
+
+# tcmiface for tcm support
+PRODUCT_PACKAGES += tcmiface
+
+PRODUCT_BOOT_JARS += \
+    tcmiface
+
