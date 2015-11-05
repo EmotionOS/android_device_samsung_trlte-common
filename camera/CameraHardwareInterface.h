@@ -109,12 +109,12 @@ public:
             rc = cameraModule->open_legacy(module, mName.string(),
                                                CAMERA_DEVICE_API_VERSION_1_0,
                                                (hw_device_t **)&mDevice);
-        } else {
-            rc = CameraService::filterOpenErrorCode(module->methods->open(
-                module, mName.string(), (hw_device_t **)&mDevice));
+        //} else {
+         //   rc = CameraService::filterOpenErrorCode(module->methods->open(
+          //      module, mName.string(), (hw_device_t **)&mDevice));
         }
         if (rc != OK) {
-            ALOGE("Could not open camera %s: %d", mName.string(), rc);
+            ALOGE("Could not open camera, hacked temp without rc code (fixme) %s: %d", mName.string(), rc);
             return rc;
         }
         initHalPreviewWindow();
