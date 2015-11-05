@@ -203,6 +203,10 @@ PRODUCT_PACKAGES += \
     init.sec.boot.sh \
     ueventd.qcom.rc
 
+# Samsung symbols
+PRODUCT_PACKAGES += \
+    libsamsung_symbols
+
 # Torch
 PRODUCT_PACKAGES += \
     Torch
