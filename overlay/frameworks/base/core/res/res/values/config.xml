@@ -21,35 +21,10 @@
      for different hardware and product builds. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- If this is true, the screen will fade off. -->
-    <bool name="config_animateScreenLights">false</bool>
-
-    <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
-         autodetected from the Configuration. -->
-    <bool name="config_showNavigationBar">false</bool>
 
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
     <bool name="config_automatic_brightness_available">true</bool>
-
-
-    <bool name="config_deskDockEnablesAccelerometer">true</bool>
-    <bool name="config_carDockEnablesAccelerometer">true</bool>
-
-    <!-- Does the notification LED support multiple colors?
-         Used to decide if the user can change the colors -->
-    <!-- bool name="config_multiColorNotificationLed">true</bool-->
-
-    <!-- Default color for notification LED is white. -->
-    <color name="config_defaultNotificationColor">#ffffffff</color>
-
-    <!-- Default LED on time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOn">1000</integer>
-    <!-- Default LED off time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOff">9000</integer>
-
-    <!-- reference volume index for music stream to limit headphone volume and display warning -->
-    <integer name="config_safe_media_volume_index">6</integer>
 
     <!-- Default value for led color when battery is medium charged -->
     <!-- The green LED is brighter than red, bias closer to yellow. -->
@@ -125,9 +100,6 @@
 
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
     <integer name="config_shutdownBatteryTemperature">680</integer>
-
-   <!-- Whether camera shutter sound is forced or not  (country specific). -->
-    <bool name="config_camera_sound_forced">true</bool>
 
     <!-- XXXXX NOTE THE FOLLOWING RESOURCES USE THE WRONG NAMING CONVENTION.
          Please don't copy them, copy anything else. -->
@@ -219,24 +191,11 @@
     <!-- string indicating the OUI that should be used when generating random mac addresses -->
     <string  translatable="false" name="config_wifi_random_mac_oui">92-68-C3</string>
 
-    <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
-         on the headphone/microphone jack. When false use the older uevent framework. -->
-    <bool name="config_useDevInputEventForAudioJack">false</bool>
-
-    <!-- Enables or disables fading edges when marquee is enabled in TextView. -->
-    <bool name="config_ui_enableFadingMarquee">false</bool>
-
     <!-- The VoiceMail default value is displayed to my own number if it is true -->
     <bool name="config_telephony_use_own_number_for_voicemail">true</bool>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
-
-    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
-    <!--bool name="config_intrusiveBatteryLed">true</bool-->
-
-    <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
-    <!--bool name="config_multiColorBatteryLed">true</bool-->
 
     <!-- List of paths to serial ports that are available to the serial manager.
          for example, /dev/ttyUSB0
@@ -270,9 +229,6 @@
     <!-- MMS user agent string -->
     <string name="config_mms_user_agent" translatable="false">note4</string>
 
-    <!-- MMS user agent prolfile url -->
-    <!--string name="config_mms_user_agent_profile_url" translatable="false">http://uaprof.motorola.com/phoneconfig/nexus6/Profile/nexus6.rdf</string-->
-
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
     <!--  Whether Multiuser UI should be shown -->
@@ -290,26 +246,22 @@
          If no value is found for the rat-name in use, the system default will be applied.
     -->
     <string-array name="config_mobile_tcp_buffers">
-        <item>umts:131072,262144,1452032,4096,16384,399360</item>
-        <item>hspa:131072,262144,2441216,4096,16384,399360</item>
-        <item>hsupa:131072,262144,2441216,4096,16384,399360</item>
-        <item>hsdpa:131072,262144,2441216,4096,16384,399360</item>
-        <item>hspap:131072,262144,2441216,4096,16384,399360</item>
-        <item>edge:16384,32768,131072,4096,16384,65536</item>
-        <item>gprs:4096,8192,24576,4096,8192,24576</item>
-        <item>1xrtt:16384,32768,131070,4096,16384,102400</item>
-        <item>evdo:131072,262144,1048576,4096,16384,524288</item>
-        <item>lte:524288,1048576,8388608,262144,524288,4194304</item>
+        <item>umts:4094,87380,110208,4096,16384,110208</item>
+        <item>hspa:4094,87380,1220608,4096,16384,1220608</item>
+        <item>hsupa:4094,87380,1220608,4096,16384,1220608</item>
+        <item>hsdpa:4094,87380,2441216,4096,16384,2441216</item>
+        <item>hspap:4094,87380,1220608,4096,16384,1220608</item>
+        <item>edge:4093,26280,35040,4096,16384,35040</item>
+        <item>gprs:4092,8760,11680,4096,8760,11680</item>
+        <item>1xrtt:4096,87380,524288,4096,16384,110208</item>
+        <item>evdo:4094,87380,524288,4096,16384,262144</item>
+        <item>lte: 2097152,4194304,8388608,1048576,3145728,4194304</item>
     </string-array>
 
     <!-- Configure wifi tcp buffersizes in the form:
          rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max -->
     <string name="config_wifi_tcp_buffers" translatable="false">524288,2097152,4194304,262144,524288,1048576</string>
 
-    <!-- Config determines whether to update phone object when voice registration
-         state changes. Voice radio tech change will always trigger an update of
-         phone object irrespective of this config -->
-    <bool name="config_switch_phone_on_voice_reg_state_change">false</bool>
 
     <!-- Values for GPS configuration -->
     <string-array translatable="false" name="config_gpsParameters">
@@ -355,8 +307,6 @@
         <item>10</item>
     </integer-array>
 
-    <!-- Workaround for devices with broken keyboards -->
-    <!--bool name="config_forceDisableHardwareKeyboard">true</bool-->
 
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
@@ -416,20 +366,6 @@
          The default is false. -->
     <bool name="config_suspendWhenScreenOffDueToProximity">false</bool>
 
-    <!-- Indicate the device's Smart Cover coordinates.
-         If none are provided, then the feature will be disabled.
-         The array should contain 4 values, in pixels, (sample values provided):
-         Top      0
-         Left     100
-         Bottom   Top + 400
-         Right    Display Width - 100
-    -->
-    <!--integer-array name="config_smartCoverWindowCoords">
-        <item>30</item>
-        <item>80</item>
-        <item>9600</item>
-        <item>1340</item>
-    </integer-array-->
 
     <!-- Override the default detection behavior for the framework method
          android.view.ViewConfiguration#hasPermanentMenuKey().
@@ -440,10 +376,7 @@
     <integer name="config_overrideHasPermanentMenuKey">2</integer>
 
     <!-- Boolean to enable Stylus gestures -->
-    <!--bool name="config_stylusGestures">true</bool-->
-
-    <!-- Boolean to enable stk functionality on Samsung phones -->
-    <!--bool name="config_samsung_stk">true</bool-->
+    <bool name="config_stylusGestures">false</bool>
 
     <!-- enable doze powersaving mode -->
     <bool name="config_enableAutoPowerModes">true</bool>
