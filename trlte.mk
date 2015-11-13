@@ -94,7 +94,7 @@ PRODUCT_COPY_FILES += \
 # Camera
 PRODUCT_PACKAGES += \
     libxml2
-#    camera.apq8084 \
+    camera.apq8084 \
 
 # Display
 PRODUCT_PACKAGES += \
