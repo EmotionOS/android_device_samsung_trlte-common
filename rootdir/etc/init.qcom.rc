@@ -42,8 +42,6 @@ on init
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /storage 0550 system sdcard_r
 
 
     # Support legacy paths
@@ -102,10 +100,6 @@ on post-fs
     chown radio system /dev/mobicore-user
 
 on post-fs-data
-
-    # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0775 media_rw media_rw
-    chown media_rw media_rw /data/media
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
@@ -245,9 +239,6 @@ on post-fs-data
     chmod 2770 /data/audio
 
     setprop vold.post_fs_data_done 1
-
-    #Create a folder for SRS to be able to create a usercfg file
-    mkdir /data/data/media 0770 media media
 
     chown system radio /sys/module/mhi/parameters/mhi_uci_dump
 
