@@ -17,6 +17,7 @@ etc/Hdmi_cal.acdb
 etc/Headset_cal.acdb
 etc/Speaker_cal.acdb
 lib/libcsd-client.so
+lib/libdetectmodem.so
 lib/libmysound.so
 lib/libssaudio-client.so
 vendor/lib/libacdbloader.so
