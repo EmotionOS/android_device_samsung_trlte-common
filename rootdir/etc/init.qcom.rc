@@ -1595,8 +1595,9 @@ service sec-sh /system/bin/sh /system/etc/init.sec.boot.sh
     user root
     oneshot
 
-service charger /charger
+service charger /sbin/healthd -c
     class charger
+    seclabel u:r:healthd:s0
 
 service hcidump /system/bin/sh /system/etc/hcidump.sh
     user bluetooth
