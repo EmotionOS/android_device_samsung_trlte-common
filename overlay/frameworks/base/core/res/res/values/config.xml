@@ -26,6 +26,24 @@
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
     <bool name="config_automatic_brightness_available">true</bool>
 
+    <bool name="config_deskDockEnablesAccelerometer">true</bool>
+    <bool name="config_carDockEnablesAccelerometer">true</bool>
+
+    <!-- Does the notification LED support multiple colors?
+         Used to decide if the user can change the colors -->
+    <bool name="config_multiColorNotificationLed">true</bool>
+
+    <!-- Default color for notification LED is white. -->
+    <color name="config_defaultNotificationColor">#ffffffff</color>
+
+    <!-- Default LED on time for notification LED in milliseconds. -->
+    <integer name="config_defaultNotificationLedOn">1000</integer>
+    <!-- Default LED off time for notification LED in milliseconds. -->
+    <integer name="config_defaultNotificationLedOff">9000</integer>
+
+    <!-- reference volume index for music stream to limit headphone volume and display warning -->
+    <integer name="config_safe_media_volume_index">6</integer>
+
     <!-- Default value for led color when battery is medium charged -->
     <!-- The green LED is brighter than red, bias closer to yellow. -->
     <integer name="config_notificationsBatteryMediumARGB">0xFFFF6000</integer>
@@ -198,12 +216,15 @@
     <bool name="config_intrusiveNotificationLed">true</bool>
 
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
+<<<<<<< HEAD
     <bool name="config_intrusiveBatteryLed">true</bool>
     
     <!-- Does the battery LED support multiple colors?
          Used to decide if the user can change the colors -->
     <bool name="config_multiColorBatteryLed">true</bool>
     
+    <bool name="config_intrusiveBatteryLed">true</bool>
+
     <!-- List of paths to serial ports that are available to the serial manager.
          for example, /dev/ttyUSB0
     -->
@@ -397,11 +418,11 @@
     <integer name="config_overrideHasPermanentMenuKey">2</integer>
 
     <!-- Boolean to enable Stylus gestures -->
-    <bool name="config_stylusGestures">false</bool>
+    <bool name="config_stylusGestures">true</bool>
 
     <!-- Boolean to enable stk functionality on Samsung phones -->
     <bool name="config_samsung_stk">true</bool>
-    
+
     <!-- enable doze powersaving mode -->
     <bool name="config_enableAutoPowerModes">true</bool>
 

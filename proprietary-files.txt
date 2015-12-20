@@ -269,7 +269,7 @@ etc/H16UL_s5k2p2xx_module_info.xml
 etc/H16US_imx240_module_info.xml
 
 # ConsumerIR Hal
-lib/hw/consumerir.apq8084.so
+lib/hw/consumerir.default.so:lib/hw/consumerir.apq8084.so
 
 # CPU
 bin/mpdecision
@@ -281,7 +281,6 @@ vendor/lib/libthermalioctl.so
 bin/qseecomd
 lib/drm/libdrmwvmplugin.so
 lib/libdrmdecrypt.so
-lib/libwvm.so
 vendor/lib/libdrmdiag.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
@@ -289,7 +288,7 @@ vendor/lib/libQSEEComAPI.so
 vendor/lib/librpmb.so
 vendor/lib/libssd.so
 vendor/lib/libWVStreamControlAPI_L1.so
-vendor/lib/libWVphoneAPI.so
+vendor/lib/libwvm.so
 vendor/lib/libwvdrm_L1.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
@@ -313,10 +312,10 @@ vendor/lib/libgsl.so
 vendor/lib/libllvm-qcom.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libOpenCL.so
+vendor/lib/libqcci_legacy.so
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
-vendor/lib/libsc-a3xx.so
 vendor/lib/libscale.so
 
 # Graphics firmware
