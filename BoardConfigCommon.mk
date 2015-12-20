@@ -65,6 +65,9 @@ USE_OPENGL_RENDERER := true
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
+# Sensors, taken from http://review.cyanogenmod.org/#/c/124083/, to make some lollipop blobs work (basically SENSOR_TYPE_HEART_RATE sensor).
+TARGET_NO_SENSOR_PERMISSION_CHECK := true
+
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 dwc3_msm.cpu_to_affin=1 androidboot.selinux=permissive
