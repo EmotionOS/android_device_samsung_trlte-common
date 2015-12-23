@@ -232,5 +232,12 @@ PRODUCT_PACKAGES += tcmiface
 PRODUCT_BOOT_JARS += \
     tcmiface
 
-# this seems to only work with the cm-11.0 branch, not cm-13.0 (for now)
-PRODUCT_PACKAGES += libstlport
+# use prebuilt
+PRODUCT_PACKAGES += \
+    libstlport
+
+# Radio
+PRODUCT_PACKAGES += \
+    libcnefeatureconfig \
+    libril_shim \
+    librmt_shim
