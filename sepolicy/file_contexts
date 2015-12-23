@@ -13,3 +13,10 @@
 /sys/devices/virtual/lcd/panel/power_reduce					u:object_r:lcd_dev:s0
 
 /system/bin/macloader										u:object_r:macloader_exec:s0
+
+
+
+#/system binaries
+/data/misc/location/gsiff(/.*)? u:object_r:gsiffd_data_file:s0
+/system/vendor/bin/gsiff_daemon u:object_r:gsiffd_exec:s0
+/data/misc/location/quipc(/.*)? u:object_r:quipc_data_file:s0
