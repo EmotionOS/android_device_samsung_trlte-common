@@ -1,3 +1,5 @@
-allow rild proc_net:file write;
+allow rild proc_net:file rw_file_perms;
 allow rild self:capability dac_override;
 allow rild sysfs:file rw_file_perms;
+allow rild tun_device:chr_file rw_file_perms;
+allow rild self:tun_socket create_socket_perms;

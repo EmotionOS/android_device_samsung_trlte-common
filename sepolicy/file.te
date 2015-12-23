@@ -1,1 +1,3 @@
 type touch_key_sysfs, fs_type, sysfs_type;
+type gsiffd_data_file, data_file_type, file_type;
+type quipc_data_file, data_file_type, file_type;
