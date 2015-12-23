@@ -93,7 +93,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    libxml2\
+    libxml2 \
     camera.apq8084 \
 
 # Display
@@ -128,6 +128,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/izat.conf:/system/etc/izat.conf \
     $(LOCAL_PATH)/configs/sap.conf:/system/etc/sap.conf
 
+# IPv6 tethering
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes
+
 # Keylayouts
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
@@ -142,6 +147,9 @@ PRODUCT_COPY_FILES += \
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.apq8084
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    sys.keymaster.loaded=true
 
 # Lights
 PRODUCT_PACKAGES += \
