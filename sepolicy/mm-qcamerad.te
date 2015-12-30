@@ -2,3 +2,7 @@ allow mm-qcamerad sysfs:file write;
 allow mm-qcamerad system_data_file:sock_file { create unlink };
 allow mm-qcamerad media_rw_data_file:dir search;
 allow mm-qcamerad qdsp_device:chr_file { open read ioctl };
+allow mm-qcamerad system_data_file:dir { write remove_name search add_name };
+allow mm-qcamerad camera_data_file:sock_file { create unlink };
+allow mm-qcamerad system_file:file execmod;
+

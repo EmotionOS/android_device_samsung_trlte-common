@@ -1,2 +1,4 @@
 allow mediaserver system_data_file:sock_file write;
 allow mediaserver socket_device:sock_file write;
+allow mediaserver system_file:file execmod;
+allow mediaserver system_prop:property_service set;
