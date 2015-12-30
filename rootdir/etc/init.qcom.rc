@@ -1242,10 +1242,14 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet input graphics radio sdcard_rw sdcard_r media_rw shell log
 
-service gsiff_daemon /system/bin/gsiff_daemon
-    class late_start
-    user system
-    group gps qcom_oncrpc net_raw
+# there seems to be a large philosophical discussion about this daemon.  The consensus seems to
+# be to not enable it http://forum.xda-developers.com/showthread.php?t=1755180 but it's here
+# and selinux can handle it if anyone wants to add it back --fattire
+
+#service gsiff_daemon /system/bin/gsiff_daemon
+#    class late_start
+#    user system
+#    group gps qcom_oncrpc
 
 service qseecomd /system/bin/qseecomd
     class core
