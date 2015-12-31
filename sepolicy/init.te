@@ -1,0 +1,8 @@
+allow init debugfs:dir mounton;
+allow init lcd_dev:file { relabelto setattr };
+allow init vibe_dev:file { relabelto setattr };
+allow init keypad_dev:file { relabelto setattr };
+allow init diag_device:chr_file unlink;
+allow init tmpfs:lnk_file create_file_perms;
+allow init userdata_block_device:blk_file rw_file_perms;
+allow init cache_block_device:blk_file rw_file_perms;
