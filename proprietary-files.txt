@@ -146,7 +146,8 @@ vendor/lib/libaudcal.so
 
 # Camera
 bin/mm-qcamera-daemon
-lib/hw/camera.apq8084.so:lib/hw/camera.vendor.apq8084.so
+#lib/hw/camera.apq8084.so:lib/hw/camera.vendor.apq8084.so
+lib/hw/camera.apq8084.so
 lib/libarcsoft_nighthawk.so
 lib/libliveframework.so
 lib/libmmcamera2_stats_algorithm.so
@@ -388,7 +389,8 @@ etc/H16UL_s5k2p2xx_module_info.xml
 etc/H16US_imx240_module_info.xml
 
 # ConsumerIR Hal
-lib/hw/consumerir.default.so:lib/hw/consumerir.apq8084.so
+#lib/hw/consumerir.default.so:lib/hw/consumerir.apq8084.so
+lib/hw/consumerir.default.so
 
 # CPU
 bin/mpdecision
