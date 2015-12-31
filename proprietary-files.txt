@@ -29,8 +29,8 @@ vendor/etc/gnss/gnss-soc-rfdev.img
 vendor/etc/gnss/gnss-soc.img
 vendor/firmware/bcm4358A0_V0033.0000.hcd
 vendor/firmware/bcm4358A0_V0033.0000_wisol.hcd
-vendor/firmware/bcm4358A1_V0051.0083.hcd
-vendor/firmware/bcm4358A1_V0051.0083_wisol.hcd
+vendor/firmware/bcm4358A1_V0054.0095.hcd
+vendor/firmware/bcm4358A1_V0054.0095_wisol.hcd
 vendor/firmware/sec_s3fwrn5_firmware.bin
 vendor/lib/hw/flp.default.so
 vendor/lib/lib-dplmedia.so
