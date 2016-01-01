@@ -415,6 +415,12 @@ on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
+    # update foreground cpuset now that processors are up
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 0-3
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 0-1
+
     chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
 
@@ -1261,6 +1267,8 @@ service mpdecision /system/bin/mpdecision --avg_comp
     user root
     group system
     disabled
+    writepid /dev/cpuset/system-background/tasks
+
 
 #service thermal-engine /system/bin/thermal-engine
 #    class main
