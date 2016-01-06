@@ -395,7 +395,9 @@ on early-boot
 
 on boot
     # Ensure all CPUs are online (big cluster)
-    # CPUSET WAIT -- write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
 
     # Update foreground cpusets now that processors are up
     write /dev/cpuset/foreground/cpus 0-3
