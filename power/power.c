@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, The CyanogenMod Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -41,12 +42,14 @@
 #include <utils/Log.h>
 #include <hardware/hardware.h>
 #include <hardware/power.h>
+#include <pthread.h>
 
 #include "utils.h"
 #include "metadata-defs.h"
 #include "hint-data.h"
 #include "performance.h"
 #include "power-common.h"
+#include "power-feature.h"
 
 static int saved_dcvs_cpu0_slack_max = -1;
 static int saved_dcvs_cpu0_slack_min = -1;
@@ -61,7 +64,9 @@ static struct hw_module_methods_t power_module_methods = {
     .open = NULL,
 };
 
-static void power_init(struct power_module *module)
+static pthread_mutex_t hint_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+static void power_init(__attribute__((unused))struct power_module *module)
 {
     ALOGI("QCOM power HAL initing.");
 
@@ -188,24 +193,28 @@ static void process_video_encode_hint(void *metadata)
     }
 }
 
-int __attribute__ ((weak)) power_hint_override(struct power_module *module, power_hint_t hint,
-        void *data)
+int __attribute__ ((weak)) power_hint_override(
+        __attribute__((unused)) struct power_module *module,
+        __attribute__((unused)) power_hint_t hint,
+        __attribute__((unused)) void *data)
 {
     return HINT_NONE;
 }
 
-static void power_hint(struct power_module *module, power_hint_t hint,
+extern void interaction(int duration, int num_args, int opt_list[]);
+
+static void power_hint(__attribute__((unused)) struct power_module *module, power_hint_t hint,
         void *data)
 {
+    pthread_mutex_lock(&hint_mutex);
+
     /* Check if this hint has been overridden. */
     if (power_hint_override(module, hint, data) == HINT_HANDLED) {
         /* The power_hint has been handled. We can skip the rest. */
-        return;
+        goto out;
     }
 
     switch(hint) {
-        case POWER_HINT_VSYNC:
-        break;
         case POWER_HINT_INTERACTION:
         {
             int resources[] = {0x702, 0x20F, 0x30F};
@@ -213,6 +222,13 @@ static void power_hint(struct power_module *module, power_hint_t hint,
 
             interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
         }
+	break;
+        case POWER_HINT_VSYNC:
+        case POWER_HINT_CPU_BOOST:
+        case POWER_HINT_LAUNCH_BOOST:
+        case POWER_HINT_AUDIO:
+        case POWER_HINT_SET_PROFILE:
+        case POWER_HINT_LOW_POWER:
         break;
         case POWER_HINT_VIDEO_ENCODE:
             process_video_encode_hint(data);
@@ -220,12 +236,24 @@ static void power_hint(struct power_module *module, power_hint_t hint,
         case POWER_HINT_VIDEO_DECODE:
             process_video_decode_hint(data);
         break;
+        default:
+        break;
     }
+
+out:
+    pthread_mutex_unlock(&hint_mutex);
 }
 
-int __attribute__ ((weak)) set_interactive_override(struct power_module *module, int on)
+int __attribute__ ((weak)) set_interactive_override(
+        __attribute__((unused)) struct power_module *module,
+        __attribute__((unused)) int on)
 {
     return HINT_NONE;
+}
+
+int __attribute__ ((weak)) get_number_of_profiles()
+{
+    return 0;
 }
 
 #ifdef SET_INTERACTIVE_EXT
@@ -237,22 +265,23 @@ void set_interactive(struct power_module *module, int on)
     char governor[80];
     char tmp_str[NODE_MAX];
     struct video_encode_metadata_t video_encode_metadata;
-    int rc;
+    int rc = 0;
+
+    pthread_mutex_lock(&hint_mutex);
 
 #ifdef SET_INTERACTIVE_EXT
     cm_power_set_interactive_ext(on);
 #endif
 
     if (set_interactive_override(module, on) == HINT_HANDLED) {
-        return;
+        goto out;
     }
 
     ALOGI("Got set_interactive hint");
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
-
-        return;
+        goto out;
     }
 
     if (!on) {
@@ -439,20 +468,46 @@ void set_interactive(struct power_module *module, int on)
     }
 
     saved_interactive_mode = !!on;
+
+out:
+    pthread_mutex_unlock(&hint_mutex);
+}
+
+void set_feature(struct power_module *module, feature_t feature, int state)
+{
+#ifdef TAP_TO_WAKE_NODE
+    char tmp_str[NODE_MAX];
+    if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE) {
+        snprintf(tmp_str, NODE_MAX, "%d", state);
+        sysfs_write(TAP_TO_WAKE_NODE, tmp_str);
+        return;
+    }
+#endif
+    set_device_specific_feature(module, feature, state);
+}
+
+int get_feature(struct power_module *module __unused, feature_t feature)
+{
+    if (feature == POWER_FEATURE_SUPPORTED_PROFILES) {
+        return get_number_of_profiles();
+    }
+    return -1;
 }
 
 struct power_module HAL_MODULE_INFO_SYM = {
     .common = {
         .tag = HARDWARE_MODULE_TAG,
-        .module_api_version = POWER_MODULE_API_VERSION_0_2,
+        .module_api_version = POWER_MODULE_API_VERSION_0_3,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = POWER_HARDWARE_MODULE_ID,
         .name = "QCOM Power HAL",
-        .author = "Qualcomm",
+        .author = "Qualcomm/CyanogenMod",
         .methods = &power_module_methods,
     },
 
     .init = power_init,
     .powerHint = power_hint,
     .setInteractive = set_interactive,
+    .setFeature = set_feature,
+    .getFeature = get_feature
 };
