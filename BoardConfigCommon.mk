@@ -69,7 +69,9 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 dwc3_msm.cpu_to_affin=1
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02600000 --tags_offset 0x02400000 --second_offset 0x00f00000
+BOARD_RAMDISK_OFFSET     := 0x02600000
+BOARD_KERNEL_TAGS_OFFSET := 0x02400000
+BOARD_SECOND_OFFSET      := 0x00f00000
 TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_CONFIG := apq8084_sec_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
