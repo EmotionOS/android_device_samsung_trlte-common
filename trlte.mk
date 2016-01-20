@@ -101,6 +101,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libxml2 \
     camera.apq8084 \
+    Snap
 
 # Charger
 PRODUCT_PACKAGES += \
