@@ -195,6 +195,21 @@
              height="144"
              frameRate="30" />
 
+
+    <EncoderProfile quality="timelapse2160p" fileFormat="mp4" duration="30">
+         <Video codec="h264"
+         bitRate="50000000"
+         width="3840"
+         height="2160"
+         frameRate="30" />
+ 
+     <!-- audio setting is ignored -->
+         <Audio codec="aac"
+         bitRate="256000"
+         sampleRate="48000"
+         channels="2" />
+    </EncoderProfile>
+
       <!--
             The Audio part of the profile will not be used since time lapse mode
             does not capture audio
