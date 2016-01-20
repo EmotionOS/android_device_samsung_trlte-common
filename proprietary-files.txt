@@ -281,6 +281,7 @@ vendor/lib/libthermalioctl.so
 bin/qseecomd
 lib/drm/libdrmwvmplugin.so
 lib/libdrmdecrypt.so
+lib/libwvm.so
 vendor/lib/libdrmdiag.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
@@ -290,7 +291,6 @@ vendor/lib/libssd.so
 vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/libWVphoneAPI.so
 vendor/lib/libwvdrm_L1.so
-vendor/lib/libwvm.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 # GPS
