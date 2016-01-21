@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015 The CyanogenMod Project
+# Copyright (C) 2015-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -100,17 +100,13 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    libxml2 \
     camera.apq8084 \
     libxml2
 
 # Charger
 PRODUCT_PACKAGES += \
-    charger_res_images
-
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images
+    charger_res_images \
+    Snap
 
 # Display
 PRODUCT_PACKAGES += \
@@ -120,8 +116,8 @@ PRODUCT_PACKAGES += \
     memtrack.apq8084
 
 # Doze service
-#PRODUCT_PACKAGES += \
-#    SamsungDoze
+PRODUCT_PACKAGES += \
+    SamsungDoze
 
 PRODUCT_PACKAGES += \
    libhealthd.default
