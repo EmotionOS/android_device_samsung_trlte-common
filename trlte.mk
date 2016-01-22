@@ -100,13 +100,13 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+    libxml2 \
     camera.apq8084 \
-    libxml2
+    Snap
 
 # Charger
 PRODUCT_PACKAGES += \
-    charger_res_images \
-    Snap
+    charger_res_images
 
 # Display
 PRODUCT_PACKAGES += \

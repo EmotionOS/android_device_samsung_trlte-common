@@ -394,18 +394,6 @@ on early-boot
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
-    # Ensure all CPUs are online (big cluster)
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-
-    # Update foreground cpusets now that processors are up
-    write /dev/cpuset/foreground/cpus 0-3
-    write /dev/cpuset/foreground/boost/cpus 0-3
-    write /dev/cpuset/background/cpus 0
-    write /dev/cpuset/system-background/cpus 0-1
-
-    mount debugfs /sys/kernel/debug /sys/kernel/debug
 
     # CPU Sets
 
@@ -1290,7 +1278,6 @@ service mpdecision /system/bin/mpdecision --avg_comp
     group system
     writepid /dev/cpuset/system-background/tasks
     disabled
-    # cpusets NO YET -- writepid /dev/cpuset/system-background/tasks
 
 
 #service thermal-engine /system/bin/thermal-engine
