@@ -385,7 +385,7 @@ static void mydataCallback(int32_t msg_type,
             sourcepic[idx].format = 2050; //YUV NV21
             sourcepic[idx].width = picwidth; //0x14C0;
             sourcepic[idx].height = picheight; //0xBAC;
-            sourcepic[idx].pYuv2ndpart = ((char*) sourcepic[idx].pYUVdata) + (picwidth*picheight);// + 0xF23100;
+            sourcepic[idx].pYuv2ndpart= sourcepic[idx].pYUVdata + (picwidth*picheight);// + 0xF23100;
             sourcepic[idx].nothing = 0;
             sourcepic[idx].nothing2 = 0;
             sourcepic[idx].width2 = picwidth; //0x14C0;
@@ -823,7 +823,7 @@ static int camera_take_picture(struct camera_device *device)
        destpic.width = picwidth; //0x14C0;
        destpic.height = picheight; //0xBAC;
        destpic.pYUVdata= destbuffer;
-       destpic.pYuv2ndpart = ((char*) destbuffer) + (picwidth*picheight); //+ 0xF23100;
+       destpic.pYuv2ndpart = destbuffer + (picwidth*picheight); //+ 0xF23100;
        destpic.nothing = 0;
        destpic.nothing2 = 0;
        destpic.width2 = picwidth; //0x14C0;
