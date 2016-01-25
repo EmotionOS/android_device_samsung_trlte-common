@@ -164,7 +164,8 @@ PRODUCT_PACKAGES += \
     keystore.apq8084
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    sys.keymaster.loaded=true
+    sys.keymaster.loaded=true \
+    ro.qualcomm.perf.cores_online=2
 
 # Lights
 PRODUCT_PACKAGES += \
