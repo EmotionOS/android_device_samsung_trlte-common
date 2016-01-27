@@ -1,3 +1,7 @@
+# Bluetooth fix
+lib/hw/bluetooth.default.so
+lib/libbluetooth_jni.so
+
 # to check where did they come from and what do we really need
 bin/efsks
 bin/ks
@@ -27,17 +31,6 @@ vendor/etc/gnss/gnss-soc-es6-rfdev.img
 vendor/etc/gnss/gnss-soc-es6.img
 vendor/etc/gnss/gnss-soc-rfdev.img
 vendor/etc/gnss/gnss-soc.img
-# Not here because we have it in trtlexx
-#vendor/firmware/bcm4358A0_V0033.0000.hcd
-#vendor/firmware/bcm4358A0_V0033.0000_wisol.hcd
-#vendor/firmware/bcm4358A1_V0054.0095.hcd
-#vendor/firmware/bcm4358A1_V0054.0095_wisol.hcd
-#vendor/firmware/sec_s3fwrn5_firmware.bin
-# Before
-# vendor/firmware/bcm4358A0_V0033.0000.hcd
-# vendor/firmware/bcm4358A0_V0033.0000_wisol.hcd
-# vendor/firmware/bcm4358A1_V0051.0083.hcd
-# vendor/firmware/bcm4358A1_V0051.0083_wisol.hcd
 vendor/lib/hw/flp.default.so
 vendor/lib/lib-dplmedia.so
 vendor/lib/lib-imsdpl.so
