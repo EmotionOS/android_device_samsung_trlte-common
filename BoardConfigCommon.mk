@@ -21,6 +21,12 @@ LOCAL_PATH := device/samsung/trlte-common
 
 # Architecture
 TARGET_CPU_VARIANT := krait
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+
+ENABLE_CPUSETS := true
 
 ENABLE_CPUSETS := true
 
@@ -64,6 +70,9 @@ USE_OPENGL_RENDERER := true
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
+# Sensors, taken from http://review.cyanogenmod.org/#/c/124083/, to make some lollipop blobs work (basically SENSOR_TYPE_HEART_RATE sensor).
+TARGET_NO_SENSOR_PERMISSION_CHECK := true
+
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 dwc3_msm.cpu_to_affin=1
@@ -88,6 +97,7 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 17825792
+BOARD_CACHEIMAGE_PARTITION_SIZE := 524288000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 19922944
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3984588800
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 26558312448

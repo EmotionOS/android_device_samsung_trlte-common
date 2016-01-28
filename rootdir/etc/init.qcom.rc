@@ -1279,6 +1279,7 @@ service mpdecision /system/bin/mpdecision --avg_comp
     writepid /dev/cpuset/system-background/tasks
     disabled
 
+
 #service thermal-engine /system/bin/thermal-engine
 #    class main
 #    user root
@@ -1322,7 +1323,7 @@ on property:init.svc.ril-daemon=running
     setprop ro.mdm_helper_proxy_req true
 
 on property:ro.baseband=mdm
-	start mdm_helper
+    start mdm_helper
 
 on property:ro.baseband=mdm2
     insmod /system/lib/modules/mhi.ko
@@ -1657,4 +1658,3 @@ on charger
     write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu0/retention/idle_enabled 1
-

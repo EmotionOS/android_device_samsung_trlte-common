@@ -1,3 +1,121 @@
+# Bluetooth fix
+lib/hw/bluetooth.default.so
+lib/libbluetooth_jni.so
+
+# to check where did they come from and what do we really need
+bin/efsks
+bin/ks
+bin/mdm_helper
+bin/mdm_helper_proxy
+bin/qcks
+bin/qmuxd
+bin/rild
+bin/rmnetcli
+lib/hw/power.default.so
+lib/libloc_api_v02.so
+lib/libreference-ril.so
+lib/libril.so
+lib/librmnetctl.so
+lib/libsec-ril.so
+lib/libsecnativefeature.so
+lib/libsecril-client.so
+lib/libstlport.so
+vendor/bin/gnss.qca1530.sh
+vendor/bin/gnss.qca1530.svcd
+vendor/bin/qti
+vendor/bin/sound_trigger_test
+vendor/etc/gnss/gnss-fsh.bin
+vendor/etc/gnss/gnss-soc-data.img
+vendor/etc/gnss/gnss-soc-es6-data.img
+vendor/etc/gnss/gnss-soc-es6-rfdev.img
+vendor/etc/gnss/gnss-soc-es6.img
+vendor/etc/gnss/gnss-soc-rfdev.img
+vendor/etc/gnss/gnss-soc.img
+vendor/lib/hw/flp.default.so
+vendor/lib/lib-dplmedia.so
+vendor/lib/lib-imsdpl.so
+vendor/lib/lib-imsqimf.so
+vendor/lib/lib-imsrcs.so
+vendor/lib/lib-imss.so
+vendor/lib/lib-imsSDP.so
+vendor/lib/lib-imsvt.so
+vendor/lib/lib-imsxml.so
+vendor/lib/lib-rcsimssjni.so
+vendor/lib/lib-rcsjni.so
+vendor/lib/lib-rtpcommon.so
+vendor/lib/lib-rtpcore.so
+vendor/lib/lib-rtpdaemoninterface.so
+vendor/lib/lib-rtpsl.so
+vendor/lib/libacdbmapper.so
+vendor/lib/libaudioalsa.so
+vendor/lib/libbccQTI.so
+vendor/lib/libbtnv.so
+vendor/lib/libcneapiclient.so
+vendor/lib/libCommandSvc.so
+vendor/lib/libconfigdb.so
+vendor/lib/libdiag.so
+vendor/lib/libdsutils.so
+vendor/lib/libgeofence.so
+vendor/lib/libhwdaphal.so
+vendor/lib/libidl.so
+vendor/lib/libizat_core.so
+vendor/lib/liblbs_core.so
+vendor/lib/liblistenjni.so
+vendor/lib/liblistensoundmodel2.so
+vendor/lib/liblocationservice.so
+vendor/lib/libmdmdetect.so
+vendor/lib/libmm-disp-apis.so
+vendor/lib/libmm-hdcpmgr.so
+vendor/lib/libmm-qdcm.so
+vendor/lib/libmmhttpstack.so
+vendor/lib/libmmiipstreammmihttp.so
+vendor/lib/libmmipstreamaal.so
+vendor/lib/libmmipstreamnetwork.so
+vendor/lib/libmmipstreamsourcehttp.so
+vendor/lib/libmmipstreamutils.so
+vendor/lib/libmmQSM.so
+vendor/lib/libmmrtpdecoder.so
+vendor/lib/libnetmgr.so
+vendor/lib/liboemcrypto.so
+vendor/lib/libperipheral_client.so
+vendor/lib/libpvr.so
+vendor/lib/libqmi.so
+vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_client_qmux.so
+vendor/lib/libqmi_common_so.so
+vendor/lib/libqmi_csi.so
+vendor/lib/libqmi_encdec.so
+vendor/lib/libqmiservices.so
+vendor/lib/libquipc_os_api.so
+vendor/lib/libril-qcril-hook-oem.so
+vendor/lib/librmp.so
+vendor/lib/libSHIMDivxDrm.so
+vendor/lib/libSSEPKCS11.so
+vendor/lib/libsubsystem_control.so
+vendor/lib/libSubSystemShutdown.so
+vendor/lib/libtzdrmgenprov.so
+vendor/lib/libulp2.so
+vendor/lib/libvcel.so
+vendor/lib/libvoice-svc.so
+vendor/lib/libwifiscanner.so
+vendor/lib/libxml.so
+vendor/lib/mediadrm/libdrmclearkeyplugin.so
+vendor/lib/qcdrm/playready/lib/drm/libdrmprplugin_customer.so
+vendor/lib/qcdrm/playready/lib/libtzplayready_customer.so
+vendor/lib/rfsa/adsp/libadsp_fd_skel.so
+vendor/lib/rfsa/adsp/libapps_mem_heap.so
+vendor/lib/rfsa/adsp/libdspCV_skel.so
+vendor/lib/rfsa/adsp/libfastcvadsp.so
+vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
+vendor/lib/rfsa/adsp/libscveT2T_skel.so
+vendor/lib/soundfx/libqcbassboost.so
+vendor/lib/soundfx/libqcreverb.so
+vendor/lib/soundfx/libqcvirt.so
+vendor/media/LMspeed_508.emd
+vendor/media/PFFprec_600.emd
+
+
+
 # ADSP
 bin/adsprpcd
 vendor/lib/libadsprpc.so
@@ -27,7 +145,8 @@ vendor/lib/libaudcal.so
 
 # Camera
 bin/mm-qcamera-daemon
-lib/hw/camera.apq8084.so:lib/hw/camera.vendor.apq8084.so
+#lib/hw/camera.apq8084.so:lib/hw/camera.vendor.apq8084.so
+lib/hw/camera.apq8084.so
 lib/libarcsoft_nighthawk.so
 lib/libliveframework.so
 lib/libmmcamera2_stats_algorithm.so
@@ -269,7 +388,8 @@ etc/H16UL_s5k2p2xx_module_info.xml
 etc/H16US_imx240_module_info.xml
 
 # ConsumerIR Hal
-lib/hw/consumerir.apq8084.so
+#lib/hw/consumerir.default.so:lib/hw/consumerir.apq8084.so
+lib/hw/consumerir.default.so
 
 # CPU
 bin/mpdecision
@@ -289,7 +409,7 @@ vendor/lib/libQSEEComAPI.so
 vendor/lib/librpmb.so
 vendor/lib/libssd.so
 vendor/lib/libWVStreamControlAPI_L1.so
-vendor/lib/libWVphoneAPI.so
+vendor/lib/libwvm.so
 vendor/lib/libwvdrm_L1.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
@@ -313,10 +433,10 @@ vendor/lib/libgsl.so
 vendor/lib/libllvm-qcom.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libOpenCL.so
+vendor/lib/libqcci_legacy.so
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
-vendor/lib/libsc-a3xx.so
 vendor/lib/libscale.so
 
 # Graphics firmware
@@ -356,7 +476,7 @@ vendor/lib/libqc-opt.so
 
 # Postprocessing
 vendor/lib/libdisp-aba.so
--vendor/lib/libmm-abl.so
+vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
 
 # Sensors
@@ -365,7 +485,7 @@ lib/hw/sensorhubs.apq8084.so
 
 # Time services
 bin/time_daemon
--app/TimeService/TimeService.apk
+app/TimeService/TimeService.apk
 lib/libcommon_time_client.so
 vendor/lib/libTimeService.so
 vendor/lib/libtime_genoff.so
@@ -379,3 +499,4 @@ etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_net.txt
 etc/wifi/nvram_net.txt_r10
 etc/wifi/wpa_supplicant.conf
+
