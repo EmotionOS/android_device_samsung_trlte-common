@@ -1,0 +1,32 @@
+[
+  {
+    "remote": "cm",
+    "repository": "android_external_stlport",
+    "target_path": "external/stlport",
+    "revision": "cm-13.0"  
+  },
+  {
+    "remote": "cm",
+    "repository": "android_external_connectivity",
+    "target_path": "external/connectivity",
+    "revision": "cm-13.0"  
+  },
+  {
+    "remote": "github",
+     "repository": "CyanogenMod/android_device_samsung_qcom-common",
+     "target_path": "device/samsung/qcom-common",
+     "revision": "cm-13.0"
+  },
+  { 
+    "remote": "github",
+     "repository": "CyanogenMod/android_device_qcom_common",
+     "target_path": "device/qcom/common",
+     "revision": "cm-13.0"
+  },
+  {
+    "remote":"github",
+    "repository": "Emotroid-Rom/emotion_cm_kernel_trlte",
+    "target_path": "kernel/samsung/trlte",
+    "revision": "emotion-13.0-experimental"
+  }
+]
