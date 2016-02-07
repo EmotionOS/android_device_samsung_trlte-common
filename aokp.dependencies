@@ -1,22 +1,18 @@
 [
   {
-    "remote": "cm",
-    "repository": "android_external_stlport",
+    "repository": "CyanogenMod/android_external_stlport",
     "target_path": "external/stlport"
   },
   {
-    "remote": "cm",
-    "repository": "android_external_connectivity",
+    "repository": "CyanogenMod/android_external_connectivity",
     "target_path": "external/connectivity"
   },
   {
-    "remote": "cm",
-     "repository": "android_device_samsung_qcom-common",
+     "repository": "CyanogenMod/android_device_samsung_qcom-common",
      "target_path": "device/samsung/qcom-common",
   },
   { 
-    "remote": "cm",
-     "repository": "android_device_qcom_common",
+     "repository": "CyanogenMod/android_device_qcom_common",
      "target_path": "device/qcom/common"
   },
   {
