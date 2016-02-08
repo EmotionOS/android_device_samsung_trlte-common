@@ -1285,15 +1285,10 @@ service mpdecision /system/bin/mpdecision --avg_comp
 #    user root
 #    group radio system
 
-service time_daemon /system/bin/time_daemon 
+service time_daemon /system/bin/time_daemon
+    class late_start
     user root
     group root
-    oneshot
-    disabled
-
-on property:persist.timed.enable=true 
-    mkdir /data/time/ 0700
-    start time_daemon
 
 service audiod /system/bin/audiod
     class late_start
