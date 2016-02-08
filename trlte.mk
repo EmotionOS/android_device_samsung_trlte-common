@@ -273,3 +273,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     audio_hal.period_size=192
 
+# enable lazy dexopt
+persist.sys.lazy.dexopt=true
