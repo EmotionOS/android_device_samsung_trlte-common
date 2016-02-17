@@ -394,6 +394,13 @@ on early-boot
 
 on boot
 
+    # Enable intelli-plug for boot
+    write /sys/module/intelli_plug/parameters/intelli_plug_active 1
+    write /sys/module/intelli_plug/parameters/touch_boost_active 0
+    write /sys/module/intelli_plug/parameters/nr_run_profile_sel 2
+    write /sys/module/intelli_plug/parameters/nr_run_hysteresis 8
+    write /sys/module/intelli_plug/parameters/cpu_nr_run_threshold 1000
+
     # CPU Sets
 
     write /dev/cpuset/foreground/cpus 0-3
@@ -1502,8 +1509,6 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
 
-    setprop ro.qualcomm.perf.cores_online 2
-
     #Set Mode Change Condition
     write /sys/devices/system/cpu/cpufreq/interactive/multi_enter_load 314
     write /sys/devices/system/cpu/cpufreq/interactive/multi_enter_time 99000
@@ -1603,7 +1608,14 @@ on property:sys.boot_completed=1
     chown system radio /sys/class/sec/sec_epen/boost_level
 
     # Post boot services
-    start mpdecision
+    #start mpdecision
+
+    # Enable intelli-plug for boot
+    write /sys/module/intelli_plug/parameters/intelli_plug_active 1
+    write /sys/module/intelli_plug/parameters/touch_boost_active 0
+    write /sys/module/intelli_plug/parameters/nr_run_profile_sel 2
+    write /sys/module/intelli_plug/parameters/nr_run_hysteresis 8
+    write /sys/module/intelli_plug/parameters/cpu_nr_run_threshold 1000
 
 service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     class late_start
