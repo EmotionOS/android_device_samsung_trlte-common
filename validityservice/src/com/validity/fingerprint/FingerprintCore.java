@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  * Copyright (C) 2016 The Mokee Project
  * Copyright (C) 2016 The CyanogenMod Project
  *
@@ -91,9 +91,9 @@ public class FingerprintCore extends VcsEvents {
     }
 
     private boolean isOperationComplete(int eventId) {
-        if (eventId == VCS_EVT_ENROLL_SUCCESS || eventId == VCS_EVT_IDENTIFY_SUCCESS || 
-            eventId == VCS_EVT_VERIFY_SUCCESS || eventId == VCS_EVT_ENROLL_FAILED || 
-            eventId == VCS_EVT_IDENTIFY_FAILED || eventId == VCS_EVT_VERIFY_FAILED || 
+        if (eventId == VCS_EVT_ENROLL_SUCCESS || eventId == VCS_EVT_IDENTIFY_SUCCESS ||
+            eventId == VCS_EVT_VERIFY_SUCCESS || eventId == VCS_EVT_ENROLL_FAILED ||
+            eventId == VCS_EVT_IDENTIFY_FAILED || eventId == VCS_EVT_VERIFY_FAILED ||
             eventId == VCS_EVT_GESTURE)
             return true;
         return false;
@@ -108,7 +108,7 @@ public class FingerprintCore extends VcsEvents {
             Log.i("Fingerprint", "Operation complete, setting to IDLE");
             this.mOperation = IDLE;
         }
-        if ((this.mOperation == GETPRINT) && ((event.eventId == VCS_EVT_EIV_FINGERPRINT_CAPTURED) || 
+        if ((this.mOperation == GETPRINT) && ((event.eventId == VCS_EVT_EIV_FINGERPRINT_CAPTURED) ||
             (event.eventId == VCS_EVT_SENSOR_FINGERPRINT_CAPTURE_FAILED))) {
             this.mOperation = IDLE;
         }
@@ -214,7 +214,7 @@ public class FingerprintCore extends VcsEvents {
     public int setSecurityLevel(int level) {
         if (mOperation != IDLE)
             return VCS_RESULT_FAILED;
-        if (level == VCS_SECURITY_LEVEL_LOW || level == VCS_SECURITY_LEVEL_REGULAR || 
+        if (level == VCS_SECURITY_LEVEL_LOW || level == VCS_SECURITY_LEVEL_REGULAR ||
             level == VCS_SECURITY_LEVEL_HIGH || level == VCS_SECURITY_LEVEL_VERY_HIGH)
             return jniSetSecurityLevel(level);
         return VCS_RESULT_INVALID_ARGUMENT;

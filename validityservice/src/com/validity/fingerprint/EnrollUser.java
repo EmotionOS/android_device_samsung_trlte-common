@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  * Copyright (C) 2016 The Mokee Project
  * Copyright (C) 2016 The CyanogenMod Project
  *
@@ -22,7 +22,7 @@ public class EnrollUser {
     public int fingerIndex;
     public int mode;
     public String userId;
-	
+
     public EnrollUser() {
         mode = 1;
     }
