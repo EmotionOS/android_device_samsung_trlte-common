@@ -32,5 +32,8 @@
     <bool name="doze_pulse_on_pick_up">true</bool>
     <!-- Doze: should the significant motion sensor be used as a pulse signal? -->
     <bool name="doze_pulse_on_significant_motion">true</bool>
+    <!-- Whether recents should use hardware layers for its taskviews. This flag can be enabled
+    for devices where the java drawing of round rects may be slow -->
+    <bool name="config_recents_use_hardware_layers">true</bool>
 </resources>
 
