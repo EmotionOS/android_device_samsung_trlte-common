@@ -48,3 +48,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # USB OTG interface
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=true
+
+# perf
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.core_ctl_min_cpu=2 \
+ro.core_ctl_max_cpu=4 \
+ro.min_freq_0=300000
+
+# lazy dextop
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.lazy.dexopt=true
+
