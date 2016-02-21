@@ -274,6 +274,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Low latency audio buffer size in frames
 PRODUCT_PROPERTY_OVERRIDES += \
     audio_hal.period_size=192
-
-# enable lazy dexopt
-persist.sys.lazy.dexopt=true
