@@ -401,6 +401,27 @@ on boot
     write /sys/module/intelli_plug/parameters/nr_run_hysteresis 8
     write /sys/module/intelli_plug/parameters/cpu_nr_run_threshold 1000
 
+    # Enable intelli-thermal for boot
+    write /sys/module/msm_thermal/parameters/enabled 1
+    write /sys/module/msm_thermal/core_control/enabled 1
+    write /sys/module/msm_thermal/parameters/core_control_mask 12
+    write /sys/module/msm_thermal/parameters/freq_control_mask 15
+    write /sys/module/msm_thermal/parameters/limit_temp_degC 80
+    write /sys/module/msm_thermal/parameters/core_limit_temp_degC 85
+
+    # Configure cpufreq_hardlimit driver
+    write /sys/kernel/cpufreq_hardlimit/userspace_dvfs_lock 1
+    write /sys/kernel/cpufreq_hardlimit/scaling_min_freq_screen_on 300000
+    write /sys/kernel/cpufreq_hardlimit/scaling_min_freq_screen_off 300000
+    write /sys/kernel/cpufreq_hardlimit/scaling_max_freq_screen_on 2649600
+    write /sys/kernel/cpufreq_hardlimit/scaling_max_freq_screen_off 1497600
+    write /sys/kernel/cpufreq_hardlimit/wakeup_kick_freq 1958400
+    write /sys/kernel/cpufreq_hardlimit/wakeup_kick_delay 2000
+    write /sys/kernel/cpufreq_hardlimit/touchboost_delay 750
+    write /sys/kernel/cpufreq_hardlimit/touchboost_eventcount 3
+    write /sys/kernel/cpufreq_hardlimit/touchboost_lo_freq 883200
+    write /sys/kernel/cpufreq_hardlimit/touchboost_hi_freq 1267200
+
     # CPU Sets
 
     write /dev/cpuset/foreground/cpus 0-3
@@ -1487,13 +1508,8 @@ on property:sys.boot_completed=1
         echo "cpubw_hwmon" > $devfreq_gov
     done
 
-    write /sys/module/msm_thermal/core_control/enabled 1
-    write /sys/module/msm_thermal/parameters/enabled "Y"
-    write /sys/module/msm_thermal/parameters/limit_temp_degC 78
-
-    write /sys/module/cpu_boost/parameters/sync_threshold 1497600
-
     # Configure the cpu-boost module
+    write /sys/module/cpu_boost/parameters/sync_threshold 1497600
     write /sys/module/cpu_boost/parameters/boost_ms 10
     write /sys/module/cpu_boost/parameters/input_boost_freq 0
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
@@ -1616,6 +1632,27 @@ on property:sys.boot_completed=1
     write /sys/module/intelli_plug/parameters/nr_run_profile_sel 2
     write /sys/module/intelli_plug/parameters/nr_run_hysteresis 8
     write /sys/module/intelli_plug/parameters/cpu_nr_run_threshold 1000
+
+    # Enable intelli-thermal for boot
+    write /sys/module/msm_thermal/parameters/enabled 1
+    write /sys/module/msm_thermal/core_control/enabled 1
+    write /sys/module/msm_thermal/parameters/core_control_mask 12
+    write /sys/module/msm_thermal/parameters/freq_control_mask 15
+    write /sys/module/msm_thermal/parameters/limit_temp_degC 80
+    write /sys/module/msm_thermal/parameters/core_limit_temp_degC 85
+
+    # Configure cpufreq_hardlimit driver
+    write /sys/kernel/cpufreq_hardlimit/userspace_dvfs_lock 1
+    write /sys/kernel/cpufreq_hardlimit/scaling_min_freq_screen_on 300000
+    write /sys/kernel/cpufreq_hardlimit/scaling_min_freq_screen_off 300000
+    write /sys/kernel/cpufreq_hardlimit/scaling_max_freq_screen_on 2649600
+    write /sys/kernel/cpufreq_hardlimit/scaling_max_freq_screen_off 1497600
+    write /sys/kernel/cpufreq_hardlimit/wakeup_kick_freq 1958400
+    write /sys/kernel/cpufreq_hardlimit/wakeup_kick_delay 2000
+    write /sys/kernel/cpufreq_hardlimit/touchboost_delay 750
+    write /sys/kernel/cpufreq_hardlimit/touchboost_eventcount 3
+    write /sys/kernel/cpufreq_hardlimit/touchboost_lo_freq 883200
+    write /sys/kernel/cpufreq_hardlimit/touchboost_hi_freq 1267200
 
 service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     class late_start
