@@ -1510,8 +1510,6 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
 
-    setprop ro.qualcomm.perf.cores_online 2
-
     #Set Mode Change Condition
     write /sys/devices/system/cpu/cpufreq/interactive/multi_enter_load 314
     write /sys/devices/system/cpu/cpufreq/interactive/multi_enter_time 99000
