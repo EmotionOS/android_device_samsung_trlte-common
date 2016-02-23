@@ -127,7 +127,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
-	fingerprintd \
+    fingerprintd \
     fingerprint.apq8084 \
     ValidityService
 
