@@ -1,0 +1,2 @@
+allow logd init:fifo_file { read write };
+
