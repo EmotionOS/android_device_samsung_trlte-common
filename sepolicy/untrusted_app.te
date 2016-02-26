@@ -1,0 +1,11 @@
+allow untrusted_app init:dir { getattr search };
+allow untrusted_app kernel:dir { getattr search };
+allow untrusted_app audiod:dir search;
+allow untrusted_app healthd:dir getattr;
+allow untrusted_app init:file read;
+allow untrusted_app kernel:file read;
+allow untrusted_app lmkd:dir getattr;
+allow untrusted_app logd:dir getattr;
+allow untrusted_app ueventd:dir getattr;
+allow untrusted_app vcs:dir { getattr search };
+allow untrusted_app vold:dir getattr;
