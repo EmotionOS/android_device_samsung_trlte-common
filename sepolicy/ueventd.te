@@ -2,4 +2,4 @@ allow ueventd lcd_dev:file { rw_file_perms relabelto };
 allow ueventd touch_key_sysfs:file rw_file_perms;
 allow ueventd vibe_dev:file {rw_file_perms relabelto };
 allow ueventd keypad_dev:file {rw_file_perms relabelto };
-
+allow ueventd vcs_device:chr_file create_file_perms;
