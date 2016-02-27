@@ -9,3 +9,4 @@ allow init cache_block_device:blk_file rw_file_perms;
 allow init cgroup:dir create_dir_perms;
 allow init kernel:system syslog_read;
 allow init sysfs_lowmemorykiller:file getattr;
+allow init system_file:file execute_no_trans;

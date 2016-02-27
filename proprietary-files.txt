@@ -489,6 +489,13 @@ vendor/lib/libmm-abl-oem.so
 
 # Sensors
 lib/hw/sensors.apq8084.so
+lib/libhr.so
+
+### Sensorhub
+bin/sensorhubservice
+lib/libgnustl_shared.so
+lib/libsensorhub.so
+lib/libsensorhubservice.so
 lib/hw/sensorhubs.apq8084.so
 
 # Time services
