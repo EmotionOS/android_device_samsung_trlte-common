@@ -643,6 +643,10 @@ on boot
     chown radio system /sys/class/devfreq/0.qcom,cpubw/min_freq
     chmod 664 /sys/class/devfreq/0.qcom,cpubw/min_freq
 
+    # for VR Performance
+    chown system system /sys/class/kgsl/kgsl-3d0/dispatch/inflight
+    chmod 0664  /sys/class/kgsl/kgsl-3d0/dispatch/inflight
+
     # Change interactive sysfs permission
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
@@ -775,6 +779,8 @@ on boot
     # LCD ALPM Mode
     chown system system /sys/class/lcd/panel/alpm
     chmod 0660 /sys/class/lcd/panel/alpm
+    chown system system /sys/class/lcd/panel/alpm_backlight
+    chmod 0660 /sys/class/lcd/panel/alpm_backlight
 
     # Auto Brightness
     chown system system  /sys/class/backlight/panel/auto_brightness
