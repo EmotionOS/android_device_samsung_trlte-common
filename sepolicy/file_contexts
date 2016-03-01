@@ -15,6 +15,12 @@
 /sys/devices/virtual/sec/sec_touchkey/keypad_enable		u:object_r:keypad_dev:s0
 #/sys/devices/virtual/timed_output/vibrator/pwm_value		u:object_r:vibe_dev:s0
 
+# Fingerprint
+/system/bin/vcsFPService                                u:object_r:vcs_exec:s0
+/data/validity(/.*)?                                    u:object_r:vcs_data_file:s0
+/dev/validity(/.*)?                                     u:object_r:vcs_device:s0
+/dev/vfsspi                                             u:object_r:vcs_device:s0
+
 /system/bin/macloader						u:object_r:macloader_exec:s0
 
 /data/misc/location/gsiff(/.*)? 				u:object_r:gsiffd_data_file:s0

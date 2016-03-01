@@ -106,7 +106,7 @@
 /dev/jpeg1                0660   system     camera
 /dev/jpeg2                0660   system     camera
 /dev/adsprpc-smd          0664   system     system
-/dev/msm_camera/*         0660   system     camera
+/dev/msm_camera*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
 /dev/msm_vidc_reg         0660   system     audio
@@ -153,6 +153,9 @@
 /dev/tty_sdio_00          0660   system     system
 /dev/ttyGS0               0660   system     system
 /dev/i2c-5                0660   media       media
+
+# Fingerprint
+/dev/vfsspi               0660   system     system
 
 # DVB devices
 /dev/dvb/adapter0/demux*  0440   media       media
