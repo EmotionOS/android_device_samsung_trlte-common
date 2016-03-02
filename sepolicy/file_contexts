@@ -22,6 +22,7 @@
 /dev/vfsspi                                             u:object_r:vcs_device:s0
 
 /system/bin/macloader						u:object_r:macloader_exec:s0
+/system/bin/sensorhubservice                                 u:object_r:sensorhubservice_exec:s0
 
 /data/misc/location/gsiff(/.*)? 				u:object_r:gsiffd_data_file:s0
 /system/bin/gsiff_daemon 					u:object_r:gsiffd_exec:s0

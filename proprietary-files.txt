@@ -394,7 +394,7 @@ vendor/lib/libxml.so
 lib/hw/sensors.apq8084.so
 lib/libhr.so
 
-### Sensorhub
+# Sensorhub
 bin/sensorhubservice
 lib/libgnustl_shared.so
 lib/libsensorhub.so
