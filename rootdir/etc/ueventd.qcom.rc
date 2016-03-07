@@ -107,7 +107,7 @@
 /dev/jpeg1                0660   system     camera
 /dev/jpeg2                0660   system     camera
 /dev/adsprpc-smd          0664   system     system
-/dev/msm_camera*         0660   system     camera
+/dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
 /dev/msm_vidc_reg         0660   system     audio
@@ -115,7 +115,7 @@
 /dev/msm_vidc_dec_sec     0660   system     audio
 /dev/msm_vidc_enc         0660   system     audio
 /dev/msm_rotator          0660   system     system
-/dev/hw_random            0600   root       root
+/dev/hw_random            0660   root       root
 /dev/adsprpc-smd          0664   system     system
 
 #permissions for audio
@@ -154,6 +154,7 @@
 /dev/tty_sdio_00          0660   system     system
 /dev/ttyGS0               0660   system     system
 /dev/i2c-5                0660   media       media
+/dev/voice_svc            0660   system     audio
 
 # Fingerprint
 /dev/vfsspi               0660   system     system
@@ -179,8 +180,9 @@
 /sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
 
 # sensorhub
+/dev/batch_io             0660   system     system
 /dev/ssp_sensorhub        0660   system     system
-/dev/iio:device*		  0660	 system	system
+/dev/iio:device*          0660	 system	    system
 /sys/devices/f9927000.spi/spi_master/spi32765/spi32765.0/iio:device*   buffer/enable 0660	  system	system
 /sys/devices/f9927000.spi/spi_master/spi32765/spi32765.0/iio:device*   buffer/length 0660	  system	system
 /sys/devices/f9927000.spi/spi_master/spi32766/spi32766.0/iio:device*   buffer/enable 0660	  system	system
@@ -202,3 +204,71 @@
 # Audience
 /dev/adnc2                 0660   system     system
 /dev/adnc3                 0660   system     system
+
+# MPL IIO
+# folders
+/sys/bus/iio/devices/iio:device*                  0777	system	radio			 
+/sys/bus/iio/devices/iio:device* buffer           0777	system	radio
+/sys/bus/iio/devices/iio:device* scan_elements    0777	system	radio
+/sys/bus/iio/devices/iio:device* trigger          0777	system	radio
+/sys/bus/iio/devices/iio:device* power            0777	system	radio
+
+# files
+/dev/iio:device*                                                    0660	system	radio
+/sys/bus/iio/devices/iio:device* uevent                             0660	system	radio
+/sys/bus/iio/devices/iio:device* dev                                0660	system	radio
+/sys/bus/iio/devices/iio:device* buffer/length                      0660	system	radio
+/sys/bus/iio/devices/iio:device* buffer/enable                      0660	system	radio
+/sys/bus/iio/devices/iio:device* scan_elements/in_timestamp_en      0660	system	radio
+/sys/bus/iio/devices/iio:device* scan_elements/in_timestamp_type    0660	system	radio
+/sys/bus/iio/devices/iio:device* scan_elements/in_timestamp_index   0660	system	radio
+/sys/bus/iio/devices/iio:device* sampling_frequency_available       0660	system	radio
+/sys/bus/iio/devices/iio:device* reg_dump                           0660	system	radio
+/sys/bus/iio/devices/iio:device* temperature                        0660	system	radio
+/sys/bus/iio/devices/iio:device* master_enable                      0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_scale                   0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_x_calibbias             0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_y_calibbias             0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_z_calibbias             0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_x_offset                0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_y_offset                0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_z_offset                0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_self_test_scale         0660	system	radio
+/sys/bus/iio/devices/iio:device* self_test_samples                  0660	system	radio
+/sys/bus/iio/devices/iio:device* self_test_threshold                0660	system	radio
+/sys/bus/iio/devices/iio:device* gyro_enable                        0660	system	radio
+/sys/bus/iio/devices/iio:device* gyro_fifo_enable                   0660	system	radio
+/sys/bus/iio/devices/iio:device* gyro_rate                          0660	system	radio
+/sys/bus/iio/devices/iio:device* power_state                        0660	system	radio
+/sys/bus/iio/devices/iio:device* sampling_frequency                 0660	system	radio
+/sys/bus/iio/devices/iio:device* self_test                          0660	system	radio
+/sys/bus/iio/devices/iio:device* gyro_matrix                        0660	system	radio
+/sys/bus/iio/devices/iio:device* secondary_name                     0660	system	radio
+/sys/bus/iio/devices/iio:device* event_accel_motion                 0660	system	radio
+/sys/bus/iio/devices/iio:device* event_smd                          0660	system	radio
+/sys/bus/iio/devices/iio:device* event_pedometer                    0660	system	radio
+/sys/bus/iio/devices/iio:device* flush_batch                        0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_scale                     0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_x_calibbias               0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_y_calibbias               0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_z_calibbias               0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_self_test_scale           0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_x_offset                  0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_y_offset                  0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_z_offset                  0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_x_dmp_bias                0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_y_dmp_bias                0660	system	radio
+/sys/bus/iio/devices/iio:device* in_accel_z_dmp_bias                0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_x_dmp_bias              0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_y_dmp_bias              0660	system	radio
+/sys/bus/iio/devices/iio:device* in_anglvel_z_dmp_bias              0660	system	radio
+/sys/bus/iio/devices/iio:device* pedometer_int_on                   0660	system	radio
+/sys/bus/iio/devices/iio:device* pedometer_on                       0660	system	radio
+/sys/bus/iio/devices/iio:device* pedometer_steps                    0660	system	radio
+/sys/bus/iio/devices/iio:device* pedometer_time                     0660	system	radio
+/sys/bus/iio/devices/iio:device* pedometer_counter                  0660	system	radio
+/sys/bus/iio/devices/iio:device* pedometer_step_thresh              0660	system	radio
+/sys/bus/iio/devices/iio:device* pedometer_int_thresh               0660	system	radio
+/sys/bus/iio/devices/iio:device* smd_enable                         0660	system	radio
+/sys/bus/iio/devices/iio:device* smd_threshold                      0660	system	radio
+/sys/bus/iio/devices/iio:device* smd_delay_threshold                0660	system	radio

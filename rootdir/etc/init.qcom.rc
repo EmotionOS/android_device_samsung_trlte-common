@@ -985,7 +985,7 @@ on boot
     chown system radio /sys/class/sensors/ssp_sensor/uncal_mag_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/ssp_flush
     chown system radio /sys/class/sensors/ssp_sensor/shake_cam
-    chmod 0600 /dev/batch_io
+    chmod 0660 /dev/batch_io
     chown system system /dev/batch_io
 # Gesture_sensor
     chown system radio /sys/class/sensors/gesture_sensor/vendor
