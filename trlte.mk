@@ -275,3 +275,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Low latency audio buffer size in frames
 PRODUCT_PROPERTY_OVERRIDES += \
     audio_hal.period_size=192
+
+# Common Qualcomm
+$(call inherit-product, device/samsung/qcom-common/qcom-common.mk)

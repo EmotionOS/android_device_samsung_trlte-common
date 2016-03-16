@@ -23,12 +23,33 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=520 \
     ro.opengles.version=196608
 
-# GPS
+# Gps
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gps.qc_nlp_in_use=0 \
     ro.gps.agps_provider=1 \
     ro.qc.sdk.izat.premium_enabled=0 \
-    ro.qc.sdk.izat.service_mask=0x0
+    ro.qc.sdk.izat.service_mask=0x0 \
+    persist.gps.qc_nlp_in_use=0
+
+# Media
+PRODUCT_PROPERTY_OVERRIDES += \
+    mm.enable.smoothstreaming=true
+
+# Nitz
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.rild.nitz_plmn="" \
+    persist.rild.nitz_long_ons_0="" \
+    persist.rild.nitz_long_ons_1="" \
+    persist.rild.nitz_long_ons_2="" \
+    persist.rild.nitz_long_ons_3="" \
+    persist.rild.nitz_short_ons_0="" \
+    persist.rild.nitz_short_ons_1="" \
+    persist.rild.nitz_short_ons_2="" \
+    persist.rild.nitz_short_ons_3=""
+
+# Qualcomm
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.timed.enable=true \
+    ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -36,10 +57,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.data.netmgrd.qos.enable=true \
+    persist.data.ds_fmc_app.mode=0 \
+    persist.data_netmgrd_nint=16 \
     persist.data.qmi.adb_logmask=0 \
+    persist.omh.enabled=1 \
     persist.radio.add_power_save=1 \
-    persist.radio.lte_vrat_report=1 \
+    persist.radio.fill_eons=1 \
+    persist.radio.use_se_table_only=1 \
+    ro.ril.telephony.mqanelements=6 \
     ro.telephony.mms_data_profile=5
 
 # Ril
@@ -54,9 +79,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=true
 
-# perf
+# Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.core_ctl_min_cpu=2 \
     ro.core_ctl_max_cpu=4 \
     ro.min_freq_0=300000 \
     ro.qualcomm.perf.cores_online=2
+
+# Wifi
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0
