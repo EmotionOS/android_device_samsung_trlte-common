@@ -58,7 +58,6 @@ BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 BOARD_HARDWARE_CLASS += device/samsung/trlte-common/cmhw
 
 # Display
-BOARD_EGL_CFG := device/samsung/trlte-common/configs/egl.cfg
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
