@@ -67,10 +67,6 @@ USE_OPENGL_RENDERER := true
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-# GPS
-TARGET_NO_RPC := true
-USE_DEVICE_SPECIFIC_GPS := true
-
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
