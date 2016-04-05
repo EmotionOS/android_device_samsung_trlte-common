@@ -82,6 +82,7 @@
 		<ctl name="MultiMedia6 Mixer SLIM_0_TX" value="0" />
 		<ctl name="MultiMedia10 Mixer SLIM_0_TX" value="0" />
 		<ctl name="IIR1 INP1 MUX" value="ZERO" />
+		<ctl name="IIR2 INP1 MUX" value="ZERO" />
 		<ctl name="SLIM TX10 MUX" value="ZERO" />
 		<ctl name="SLIM TX9 MUX" value="ZERO" />
 		<ctl name="SLIM TX8 MUX" value="ZERO" />
@@ -258,6 +259,7 @@
 		<ctl name="IIR1 Enable Band4" value="0" />
 		<ctl name="IIR1 Enable Band5" value="0" />
 		<ctl name="IIR1 INP1 Volume" value="0" />
+		<ctl name="IIR2 INP1 Volume" value="0" />
 		<!-- IIR/voice anc end -->
 		<!-- anc handset -->
 		<ctl name="ANC Slot" value="0" />
@@ -787,6 +789,16 @@
 		<ctl name="DEC2 MUX" value="DMIC2" />
 		<ctl name="DEC6 MUX" value="DMIC6" />
 	</path>
+
+	<path name="fm-mic">
+		<ctl name="AIF2_CAP Mixer SLIM TX7" value="1" />
+		<ctl name="SLIM_0_TX Channels" value="One" />
+		<ctl name="SLIM TX7 MUX" value="DEC8" />
+		<ctl name="DEC8 MUX" value="ADC5" />
+		<ctl name="DEC7 MUX" value="ADC6" />
+		<ctl name="IIR1 INP1 MUX" value="DEC8" />
+		<ctl name="IIR2 INP1 MUX" value="DEC7" />
+	</path>
 	<!-- end of Device -->
 
 	<!-- ================================================================ -->
@@ -1057,6 +1069,68 @@
 		<ctl name="ES705 Voice LPM Enable" value="1" />
 	</path>
 	<!-- end of recognition Scenario -->
+	<!-- ================================================================ -->
+	<!-- FM Scenario -->
+	<!-- RX part -->
+	<path name="fm-speaker">
+		<ctl name="SLIM RX1 MUX" value="AIF1_PB" />
+		<ctl name="SLIM RX6 MUX" value="AIF2_PB" />
+		<ctl name="RX7 MIX1 INP1" value="RX1" />
+		<ctl name="RX7 MIX1 INP2" value="RX6" />
+		<ctl name="RDAC7 MUX" value="DEM5_INV" />
+		<ctl name="SPK out" value="Enable" />
+		<ctl name="MultiMedia2 Mixer QUAT_MI2S_TX" value="1" />
+		<ctl name="RX7 Digital Volume" value="79" />
+		<ctl name="SPK DRV Volume" value="8" />
+		<ctl name="RX5 Digital Volume" value="79" />
+		<ctl name="LINEOUT2 Volume" value="16" />
+		<ctl name="LINEOUT4 Volume" value="16" />
+		<ctl name="IIR1 INP2 MUX" value="RX1" />
+		<ctl name="IIR2 INP2 MUX" value="RX6" />
+		<ctl name="DEC8 Volume" value="80" />
+		<ctl name="DEC7 Volume" value="80" />
+		<ctl name="ADC5 Volume" value="12" />
+		<ctl name="ADC6 Volume" value="12" />
+		<ctl name="RX5 MIX1 INP1" value="IIR1" />
+		<ctl name="RX5 MIX1 INP2" value="IIR2" />
+	</path>
+
+	<path name="fm-headset">
+		<ctl name="SLIM RX1 MUX" value="AIF1_PB" />
+		<ctl name="SLIM RX2 MUX" value="AIF1_PB" />
+		<ctl name="SLIM_0_RX Channels" value="Two" />
+		<ctl name="RX1 MIX1 INP1" value="RX1" />
+		<ctl name="RX2 MIX1 INP1" value="RX2" />
+		<ctl name="CLASS_H_DSM MUX" value="DSM_HPHL_RX1" />
+		<ctl name="HPHL DAC Switch" value="1" />
+		<ctl name="HPHL Volume" value="12" />
+		<ctl name="HPHR Volume" value="12" />
+		<ctl name="RX1 Digital Volume" value="84" />
+		<ctl name="RX2 Digital Volume" value="84" />
+		<ctl name="AIF2_CAP Mixer SLIM TX7" value="1" />
+		<ctl name="DEC8 Volume" value="84" />
+		<ctl name="DEC7 Volume" value="84" />
+		<ctl name="ADC5 Volume" value="10" />
+		<ctl name="ADC6 Volume" value="10" />
+		<ctl name="RX1 MIX1 INP2" value="IIR1" />
+		<ctl name="RX2 MIX1 INP2" value="IIR2" />
+	</path>
+
+	<!-- TX part -->
+	<path name="fm-input">
+		<ctl name="AIF2_CAP Mixer SLIM TX7" value="1" />
+		<ctl name="AIF2_CAP Mixer SLIM TX8" value="1" />
+		<ctl name="SLIM_0_TX Channels" value="Two" />
+		<ctl name="SLIM TX7 MUX" value="DEC8" />
+		<ctl name="SLIM TX8 MUX" value="DEC7" />
+		<ctl name="DEC8 MUX" value="ADC5" />
+		<ctl name="DEC7 MUX" value="ADC6" />
+		<ctl name="IIR1 INP1 MUX" value="DEC8" />
+		<ctl name="IIR2 INP1 MUX" value="DEC7" />
+		<ctl name="IIR1 INP1 Volume" value="84" />
+		<ctl name="IIR2 INP1 Volume" value="84" />
+	</path>
+	<!-- end of FM Scenario -->
 
 	<!-- ================================================================ -->
 	<!-- Voice call Scenario -->
@@ -1915,19 +1989,6 @@
 		<ctl name="LINEOUT4 Volume" value="18" />
 	</path>
 
-	<path name="voip-handset-carrier-extra-vol">
-		<path name="rcv" />
-		<ctl name="EAR PA Gain" value="POS_6_DB" />
-		<ctl name="RX1 Digital Volume" value="84" />
-	</path>
-
-	<path name="voip-speaker-carrier-extra-vol">
-		<path name="spk" />
-		<ctl name="RX5 Digital Volume" value="84" />
-		<ctl name="LINEOUT2 Volume" value="18" />
-		<ctl name="LINEOUT4 Volume" value="18" />
-	</path>
-
 	<path name="voip-headset-carrier">
 		<path name="ear" />
 		<ctl name="HPHL Volume" value="14" />
@@ -1960,13 +2021,13 @@
 
 	<!-- TX part -->
 	<path name="voip-main-mic-comm">
-		<ctl name="Main Mic Delay" value="4" /> 
+		<ctl name="Main Mic Delay" value="4" />
 		<path name="main-mic" />
 		<ctl name="DEC2 Volume" value="90" />
 	</path>
 
 	<path name="voip-sub-mic-comm">
-		<ctl name="Sub Mic Delay" value="1" /> 
+		<ctl name="Sub Mic Delay" value="1" />
 		<path name="sub-mic" />
 		<ctl name="DEC4 Volume" value="90" />
 	</path>
@@ -2027,15 +2088,13 @@
 	</path>
 
 	<path name="voip-main-mic-carrier">
-		<ctl name="Main Mic Delay" value="4" />
 		<path name="main-mic" />
 		<ctl name="DEC2 Volume" value="93" />
 	</path>
 
 	<path name="voip-sub-mic-carrier">
-		<ctl name="Sub Mic Delay" value="1" /> 
 		<path name="sub-mic" />
-		<ctl name="DEC4 Volume" value="90" />
+		<ctl name="DEC4 Volume" value="93" />
 	</path>
 
 	<path name="voip-headphone-mic-carrier">
@@ -2229,6 +2288,7 @@
 		<ctl name="ES705-AP Tx Channels" value="One" />
 		<ctl name="Internal Route Config" value="11" />
 	</path>
+
 
 	<path name="loopback-headset-mic-DSP">
 		<path name="call-ear-mic" />
