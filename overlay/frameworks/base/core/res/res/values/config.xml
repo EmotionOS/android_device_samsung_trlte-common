@@ -294,6 +294,9 @@
     <!-- Wether doze feature is disabled by default in settings. -->
     <bool name="config_doze_enabled_by_default">false</bool>
 
+    <!-- Fix Incall issue. -->
+    <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool>
+
     <!-- Is the device capable of hot swapping an UICC Card -->
     <bool name="config_hotswapCapable">true</bool>
 
