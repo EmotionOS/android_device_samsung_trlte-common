@@ -99,10 +99,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 26558312448
 # Platform
 TARGET_BOARD_PLATFORM := apq8084
 
-# Power HAL
-#TARGET_POWERHAL_VARIANT := qcom
-CM_POWERHAL_EXTENSION := qcom
-TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
+#  Power HAL not specified, we're using the one in trlte-common instead.
 
 # Data services
 USE_DEVICE_SPECIFIC_DATASERVICES := true
