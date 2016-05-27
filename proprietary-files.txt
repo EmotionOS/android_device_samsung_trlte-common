@@ -18,6 +18,8 @@ etc/Hdmi_cal.acdb
 etc/Headset_cal.acdb
 etc/Speaker_cal.acdb
 lib/libcsd-client.so
+# Need This lib for call audio
+#lib/libdetectmodem.so
 lib/libmysound.so
 lib/libssaudio-client.so
 vendor/lib/libacdbloader.so
@@ -290,6 +292,7 @@ vendor/lib/librpmb.so
 vendor/lib/libssd.so
 vendor/lib/libwvdrm_L1.so
 vendor/lib/libwvm.so
+vendor/lib/libWVphoneAPI.so
 vendor/lib/libWVStreamControlAPI_L1.so
 
 # Fingerprint
@@ -383,6 +386,7 @@ vendor/lib/libmm-abl-oem.so
 
 # Qualcomm
 vendor/lib/libxml.so
+lib/libxml2.so
 
 # Sensors
 lib/hw/sensors.apq8084.so
