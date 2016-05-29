@@ -292,7 +292,7 @@ vendor/lib/librpmb.so
 vendor/lib/libssd.so
 vendor/lib/libwvdrm_L1.so
 vendor/lib/libwvm.so
-vendor/lib/libWVphoneAPI.so
+-vendor/lib/libWVphoneAPI.so
 vendor/lib/libWVStreamControlAPI_L1.so
 
 # Fingerprint
@@ -407,8 +407,8 @@ vendor/lib/libTimeService.so
 -vendor/lib/libtime_genoff.so
 
 # Bluetooth firmware
-vendor/firmware/bcm4358A1_V0051.0083.hcd
-vendor/firmware/bcm4358A1_V0051.0083_wisol.hcd
+-vendor/firmware/bcm4358A1_V0051.0083.hcd
+-vendor/firmware/bcm4358A1_V0051.0083_wisol.hcd
 
 # Wi-Fi
 etc/wifi/bcmdhd_apsta.bin
