@@ -101,6 +101,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/mixer_paths_i2s.xml:system/etc/mixer_paths_i2s.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml
 
+#Bluetooth
+PRODUCT_PACKAGES += \
+    bt_stack.conf \
+    bt_did.conf \
+    auto_pair_devlist.conf \
+    iot_devlist.conf
+
 # Camera
 PRODUCT_PACKAGES += \
     libxml2 \
