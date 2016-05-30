@@ -411,11 +411,23 @@ vendor/lib/libTimeService.so
 -vendor/firmware/bcm4358A1_V0051.0083_wisol.hcd
 
 # Wi-Fi
+bin/olsrd
 etc/wifi/bcmdhd_apsta.bin
+etc/wifi/bcmdhd_ibss.bin
 etc/wifi/bcmdhd_mfg.bin
 etc/wifi/bcmdhd_sta.bin
 etc/wifi/cred.conf
 etc/wifi/nvram_mfg.txt
+etc/wifi/nvram_mfg.txt_a0
+etc/wifi/nvram_mfg.txt_a0_r10
+etc/wifi/nvram_mfg.txt_r10
+etc/wifi/nvram_mfg.txt_wisol
+etc/wifi/nvram_mfg.txt_wisol_r10
 etc/wifi/nvram_net.txt
+etc/wifi/nvram_net.txt_a0
+etc/wifi/nvram_net.txt_a0_r10
 etc/wifi/nvram_net.txt_r10
+etc/wifi/nvram_net.txt_wisol
+etc/wifi/nvram_net.txt_wisol_r10
+etc/wifi/olsrd.conf
 etc/wifi/wpa_supplicant.conf
