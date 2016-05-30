@@ -108,6 +108,9 @@ PRODUCT_PACKAGES += \
     auto_pair_devlist.conf \
     iot_devlist.conf
 
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/iop_bt.db:/system/etc/bluetooth/iop_bt.db
+
 # Camera
 PRODUCT_PACKAGES += \
     libxml2 \
