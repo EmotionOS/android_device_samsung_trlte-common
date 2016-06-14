@@ -1316,7 +1316,7 @@ service rfs_access /system/bin/rfs_access
 service qmuxd /system/bin/qmuxd
     class core
     user root
-    group radio audio bluetooth gps qcom_diag log
+    group radio audio bluetooth gps diag log
 
 service mdm_helper /system/bin/mdm_helper
     class core
