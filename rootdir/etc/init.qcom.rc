@@ -274,7 +274,7 @@ on post-fs-data
     chown system radio /sys/class/mhl/test_v2
     chown system radio /sys/class/mhl/connection
 # on userdebug and eng builds, permision change mhl sysfs
-# on property:ro.debuggable=1
+on property:ro.debuggable=1
     chmod 0666 /sys/class/mhl/timing
     chmod 0666 /sys/class/mhl/swing_v2
     chmod 0666 /sys/class/mhl/reg_tuning
@@ -403,20 +403,6 @@ on early-boot
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
-
-    # Enable msm hotplug for boot
-    write /sys/module/msm_hotplug/msm_enabled 1
-    write /sys/module/msm_hotplug/cpu_boosted 2
-    write /sys/module/msm_hotplug/max_cpu_online 4
-    write /sys/module/msm_hotplug/min_cpu_online 2
-
-    # Enable intelli-thermal for boot
-    write /sys/module/msm_thermal/parameters/enabled 1
-    write /sys/module/msm_thermal/core_control/enabled 1
-    write /sys/module/msm_thermal/parameters/core_control_mask 12
-    write /sys/module/msm_thermal/parameters/freq_control_mask 15
-    write /sys/module/msm_thermal/parameters/limit_temp_degC 80
-    write /sys/module/msm_thermal/parameters/core_limit_temp_degC 85
 
     # CPU Sets
 
@@ -1288,10 +1274,10 @@ service sensorhubservice /system/bin/sensorhubservice
     user system
     group input
 
-#service thermal-engine /system/bin/thermal-engine
-#    class main
-#    user root
-#    group radio system
+service thermal-engine /system/bin/thermal-engine
+    class main
+    user root
+    group radio system
 
 service time_daemon /system/bin/time_daemon
     class main
@@ -1580,14 +1566,6 @@ on property:sys.boot_completed=1
     write /sys/module/msm_hotplug/cpus_boosted 2
     write /sys/module/msm_hotplug/max_cpus_online 4
     write /sys/module/msm_hotplug/min_cpus_online 2
-
-    # Enable intelli-thermal for boot
-    write /sys/module/msm_thermal/parameters/enabled 1
-    write /sys/module/msm_thermal/core_control/enabled 1
-    write /sys/module/msm_thermal/parameters/core_control_mask 12
-    write /sys/module/msm_thermal/parameters/freq_control_mask 15
-    write /sys/module/msm_thermal/parameters/limit_temp_degC 80
-    write /sys/module/msm_thermal/parameters/core_limit_temp_degC 85
 
 service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     class late_start
