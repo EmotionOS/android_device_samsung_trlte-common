@@ -5,4 +5,5 @@ type panel_dev, dev_type;
 type vibe_dev, dev_type;
 type lcd_dev, dev_type;
 type efs_block_device, dev_type;
+type thermal_engine_device, dev_type;
 
