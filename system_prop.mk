@@ -16,7 +16,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-    camera2.portability.force_api=1
+    camera2.portability.force_api=1 \
+    vidc.enc.dcvs.extra-buff-count=2 \
+    persist.camera.cpp.duplication=false
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
