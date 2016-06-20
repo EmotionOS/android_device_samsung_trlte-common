@@ -261,10 +261,6 @@ PRODUCT_PACKAGES += \
     libril_shim \
     librmt_shim
 
-# Gello
-PRODUCT_PACKAGES += \
-    Gello
-
 # Reduce client buffer size for fast audio output tracks
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1
