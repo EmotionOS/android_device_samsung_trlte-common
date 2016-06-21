@@ -255,6 +255,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
+# use prebuilt
+PRODUCT_PACKAGES += \
+    libstlport
+
 # Radio
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
