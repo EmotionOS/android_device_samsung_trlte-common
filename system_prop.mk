@@ -89,3 +89,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
+
+# Burn-in protection
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.systemui.burn_in_protection=true
