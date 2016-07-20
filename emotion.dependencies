@@ -25,7 +25,7 @@
   },
   {
     "remote": "emotroid",
-    "repository": "android_device_qcom_common",
+    "repository": "Emotroid-Rom/android_device_qcom_common",
     "target_path": "device/qcom/common",
     "branch": "mm"
   },
