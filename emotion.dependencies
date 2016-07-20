@@ -24,10 +24,10 @@
     "branch": "cm-13.0"
   },
   {
-    "remote": "cm",
+    "remote": "emotroid",
     "repository": "android_device_qcom_common",
     "target_path": "device/qcom/common",
-    "branch": "cm-13.0"
+    "branch": "mm"
   },
   {
     "remote": "cm",
