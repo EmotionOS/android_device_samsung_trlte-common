@@ -17,7 +17,6 @@
 #/sys/devices/virtual/timed_output/vibrator/pwm_value		u:object_r:vibe_dev:s0
 
 # Fingerprint
-/system/bin/vcsFPService                                        u:object_r:vcs_exec:s0
 /data/validity(/.*)?                                            u:object_r:vcs_data_file:s0
 /dev/validity(/.*)?                                             u:object_r:vcs_device:s0
 /dev/vfsspi                                                     u:object_r:vcs_device:s0

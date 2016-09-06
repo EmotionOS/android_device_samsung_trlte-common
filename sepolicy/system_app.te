@@ -10,14 +10,6 @@ allow system_app self:process ptrace;
 allow system_app fingerprintd:binder call;
 allow system_app sensorhubservice:binder call;
 
-# For com.validity.fingerprint
-allow system_app vcs:process signull;
-allow system_app vcs_data_file:dir r_dir_perms;
-allow system_app vcs_data_file:file r_file_perms;
-allow system_app vcs_device:dir r_dir_perms;
-allow system_app vcs_device:file r_file_perms;
-allow system_app vcs_device:fifo_file create_file_perms;
-
 # TimeKeep
 allow system_app time_data_file:dir { create_dir_perms search };
 allow system_app time_data_file:file create_file_perms;

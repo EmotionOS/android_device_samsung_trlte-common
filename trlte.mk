@@ -141,11 +141,7 @@ PRODUCT_PACKAGES += \
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
     fingerprintd \
-    fingerprint.apq8084 \
-    ValidityService
-
-PRODUCT_PROPERTY_OVERRIDES += \
-fingerprint_enabled=1
+    fingerprint.apq8084
 
 # Gello
 PRODUCT_PACKAGES += Gello
