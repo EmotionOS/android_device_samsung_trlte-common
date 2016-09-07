@@ -139,7 +139,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fingerprintd \
     fingerprint.apq8084 \
-    ValidityService
+    validityservice
 
 # GPS
 PRODUCT_PACKAGES += \
