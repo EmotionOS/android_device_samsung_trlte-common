@@ -39,6 +39,6 @@
     "remote": "cm",
     "repository": "android_external_connectivity",
     "target_path": "external/connectivity",
-    "branch": "cm-14.0"
+    "branch": "staging/cm-14.0"
   }  
 ]
