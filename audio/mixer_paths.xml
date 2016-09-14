@@ -395,6 +395,11 @@
 		<ctl name="HDMI Mixer MultiMedia2" value="1" />
 	</path>
 
+	<!-- Low Latency Record -->
+        <path name="low-latency-record">
+                <ctl name="MultiMedia5 Mixer SLIM_0_TX" value="1" />
+        </path>
+
 	<!-- TX part -->
 	<path name="audio-record">
 		<ctl name="MultiMedia1 Mixer SLIM_0_TX" value="1" />
