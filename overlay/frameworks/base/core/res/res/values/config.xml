@@ -291,8 +291,6 @@
     <!-- If we allow automatic adjustment of screen brightness while dozing, how many times we want
          to reduce it to preserve the battery. Value of 100% means no scaling. -->
     <fraction name="config_screenAutoBrightnessDozeScaleFactor">100%</fraction>
-    <!-- Wether doze feature is disabled by default in settings. -->
-    <bool name="config_doze_enabled_by_default">false</bool>
 
     <!-- Fix Incall issue. -->
     <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool>
@@ -431,12 +429,6 @@
          1 - The device DOES have a permanent menu key; ignore autodetection.
          2 - The device DOES NOT have a permanent menu key; ignore autodetection. -->
     <integer name="config_overrideHasPermanentMenuKey">2</integer>
-
-    <!-- Boolean to enable Stylus gestures -->
-    <bool name="config_stylusGestures">true</bool>
-
-    <!-- Boolean to enable stk functionality on Samsung phones -->
-    <bool name="config_samsung_stk">true</bool>
 
     <!-- enable doze powersaving mode -->
     <bool name="config_enableAutoPowerModes">true</bool>

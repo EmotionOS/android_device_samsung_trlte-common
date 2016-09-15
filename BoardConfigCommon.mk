@@ -84,6 +84,7 @@ TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_CONFIG := emotion_cm_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/trlte
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
