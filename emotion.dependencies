@@ -37,7 +37,7 @@
   },
   {
     "remote": "github",
-    "repository": "android_external_connectivity",
+    "repository": "CyanogenMod/android_external_connectivity",
     "target_path": "external/connectivity",
     "branch": "staging/cm-14.0"
   }  
