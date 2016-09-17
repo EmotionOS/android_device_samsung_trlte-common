@@ -11,7 +11,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     av.streaming.offload.enable=true \
     audio.offload.multiple.enabled=false \
     audio.offload.gapless.enabled=true \
-    audio.offload.pcm.16bit.enable=true \
+    audio.offload.pcm.16bit.enable=true\
     audio.offload.pcm.24bit.enable=true
 
 # Display
@@ -93,3 +93,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Burn-in protection
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.systemui.burn_in_protection=true
+    
+# Device
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.model=Note 4

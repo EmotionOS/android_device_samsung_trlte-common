@@ -36,7 +36,7 @@
     "branch": "cm-14.0"
   },
   {
-    "remote": "cm",
+    "remote": "github",
     "repository": "android_external_connectivity",
     "target_path": "external/connectivity",
     "branch": "staging/cm-14.0"
