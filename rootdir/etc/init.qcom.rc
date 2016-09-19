@@ -1312,15 +1312,20 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
     user root
     oneshot
 
+service netmgrd /system/bin/netmgrd
+    class main
+    user root
+    group radio
+
 service rfs_access /system/bin/rfs_access
     class core
     user system
     group system net_raw
 
 service qmuxd /system/bin/qmuxd
-    class core
-    user root
-    group radio audio bluetooth gps qcom_diag wakelock log
+    class main
+    user radio
+    group radio audio bluetooth gps diag qcom_diag
 
 service mdm_helper /system/bin/mdm_helper
     user root
