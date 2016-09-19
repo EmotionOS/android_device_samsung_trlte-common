@@ -84,10 +84,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.net.doxlat=true \
     ro.telephony.mms_data_profile=5
 
-# Ril
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril_class=trlteRIL
-
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sensors=1

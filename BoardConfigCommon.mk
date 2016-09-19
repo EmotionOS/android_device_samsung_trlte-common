@@ -25,7 +25,9 @@ TARGET_CPU_VARIANT := krait
 ENABLE_CPUSETS := true
 
 # L1/L2 cache size parameters by @JustArchi
-BOARD_GLOBAL_CFLAGS := --param l1-cache-size=32 --param l1-cache-line-size=16 --param l2-cache-size=2048
+BOARD_GLOBAL_CFLAGS += --param l1-cache-size=32 --param l1-cache-line-size=16 --param l2-cache-size=2048
+BOARD_GLOBAL_CFLAGS += -DUSE_RIL_VERSION_10
+BOARD_GLOBAL_CPPFLAGS += -DUSE_RIL_VERSION_10
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -120,7 +122,7 @@ TARGET_GLOBAL_CFLAGS += -DQCOM_BSP
 TARGET_USES_QCOM_BSP := true
 
 # Radio
-BOARD_RIL_CLASS := ../../../device/samsung/trlte-common/ril
+TARGET_RIL_VARIANT := caf
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.qcom

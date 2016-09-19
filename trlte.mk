@@ -263,8 +263,9 @@ PRODUCT_PACKAGES += \
 # Radio
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
-    libril_shim \
-    librmt_shim
+    librmnetctl \
+    librmt_shim \
+    libprotobuf-cpp-full
 
 # Reduce client buffer size for fast audio output tracks
 PRODUCT_PROPERTY_OVERRIDES += \

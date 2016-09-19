@@ -42,7 +42,7 @@ on early-init
     symlink /data/tombstones /tombstones
 
 on init
-    export LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so:rmt_storage|librmt_shim.so:/system/vendor/lib/libqc-opt.so|libshim_qcopt.so
+    export LD_SHIM_LIBS rmt_storage|librmt_shim.so:/system/vendor/lib/libqc-opt.so|libshim_qcopt.so
     mkdir /efs 0771 system radio
 
     # Set permissions for persist partition
@@ -1286,15 +1286,23 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
     user root
     oneshot
 
+service netmgrd /system/bin/netmgrd
+    class main
+    user root
+    group radio
+
 service rfs_access /system/bin/rfs_access
     class core
     user system
     group system net_raw
 
 service qmuxd /system/bin/qmuxd
-    class core
-    user root
-    group radio audio bluetooth gps diag log
+#    class core
+#    user root
+#     group radio audio bluetooth gps diag log
+    class main
+    user radio
+    group radio audio bluetooth gps diag wakelock qcom_diag
 
 service mdm_helper /system/bin/mdm_helper
     class core
