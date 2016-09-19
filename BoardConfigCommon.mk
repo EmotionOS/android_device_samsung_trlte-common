@@ -156,6 +156,5 @@ WIFI_BUS := PCIE
 
 # Disable dex-preoptimization
 WITH_DEXPREOPT := false
-
 # Disable dex-preopt of prebuilts to save space.
 DONT_DEXPREOPT_PREBUILTS := true
