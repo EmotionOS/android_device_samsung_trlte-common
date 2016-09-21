@@ -100,11 +100,28 @@ allow untrusted_app cm_status_bar_service:service_manager find;
 allow untrusted_app sysfs:file read;
 
 #============= vcs ==============
+allow vcs ion_device:chr_file read; 
+allow vcs ion_device:chr_file open;
+allow vcs ion_device:chr_file ioctl;
 
-# allow vcs ion_device:chr_file read; 
-# allow vcs ion_device:chr_file open;
-# allow vcs ion_device:chr_file ioctl;
+#============= rild ==============
+allow rild adsprpcd:file { getattr open read };
+allow rild debuggerd:file { getattr open read };
+allow rild healthd:file { getattr open read };
+allow rild init:file { getattr open read };
+allow rild kernel:file { getattr open read };
+allow rild lmkd:file { getattr open read };
+allow rild logd:file { getattr open read };
+allow rild mdm_helper:file { getattr open read };
+allow rild rfs_access:file { getattr open read };
+allow rild sensorhubservice:file { getattr open read };
+allow rild servicemanager:file { open read };
+allow rild surfaceflinger:file { getattr open read };
+allow rild system_data_file:dir { add_name remove_name setattr write };
+allow rild system_data_file:sock_file { create setattr unlink };
+allow rild tee:file { getattr open read };
+allow rild ueventd:file { getattr open read };
+allow rild vold:file { getattr open read };
 
 #============= vold ==============
 allow vold self:capability sys_resource;
-
