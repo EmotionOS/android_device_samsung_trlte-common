@@ -31,7 +31,6 @@ import com.android.internal.telephony.cdma.CdmaInformationRecords.CdmaSignalInfo
 import com.android.internal.telephony.cdma.SignalToneUtil;
 import com.android.internal.telephony.uicc.IccCardApplicationStatus;
 import com.android.internal.telephony.uicc.IccCardStatus;
-import com.android.internal.telephony.uicc.IccUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -285,7 +284,7 @@ public class trlteRIL extends RIL {
 
     @Override
     protected void
-    processUnsolicited (Parcel p, int type) {
+    processUnsolicited (Parcel p) {
         Object ret;
         int dataPosition = p.dataPosition();
         int response = p.readInt();
@@ -301,7 +300,7 @@ public class trlteRIL extends RIL {
             p.writeInt(newResponse);
         }
         p.setDataPosition(dataPosition);
-        super.processUnsolicited(p, type);
+        super.processUnsolicited(p);
     }
 
     @Override
@@ -320,7 +319,7 @@ public class trlteRIL extends RIL {
 
     @Override
     protected RILRequest
-    processSolicited (Parcel p, int type) {
+    processSolicited (Parcel p) {
         int serial, error;
         boolean found = false;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
@@ -352,7 +351,7 @@ public class trlteRIL extends RIL {
             /* Nothing we care about, go up */
             p.setDataPosition(dataPosition);
             // Forward responses that we are not overriding to the super class
-            return super.processSolicited(p, type);
+            return super.processSolicited(p);
         }
         rr = findAndRemoveRequestFromList(serial);
         if (rr == null) {
