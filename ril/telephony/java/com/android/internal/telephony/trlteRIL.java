@@ -46,7 +46,7 @@ public class trlteRIL extends RIL {
     private boolean mIsGsm = false;
 
     public trlteRIL(Context context, int networkMode, int cdmaSubscription) {
-        super(context, networkModes, cdmaSubscription, null);
+        super(context, networkMode, cdmaSubscription, null);
         mQANElements = 6;
     }
 
