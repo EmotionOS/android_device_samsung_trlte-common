@@ -1,44 +1,8 @@
 [
   {
     "remote":"emotroid",
-    "repository": "Emotroid-Rom/proprietary_vendor_samsung",
-    "target_path": "vendor/samsung",
-    "branch": "nougat"
-  },
-  {
-    "remote":"emotroid",
     "repository": "Emotroid-Rom/emotion_cm_kernel_trlte",
     "target_path": "kernel/samsung/trlte",
     "branch": "nougat"
-  },
-  {
-    "remote": "cm",
-    "repository": "android_hardware_samsung",
-    "target_path": "hardware/samsung",
-    "branch": "cm-14.1"
-  },
-  {
-    "remote": "cm",
-    "repository": "android_device_samsung_qcom-common",
-    "target_path": "device/samsung/qcom-common",
-    "branch": "cm-14.1"
-  },
-  {
-    "remote": "cm",
-    "repository": "android_device_qcom_common",
-    "target_path": "device/qcom/common",
-    "branch": "cm-14.1"
-  },
-  {
-    "remote": "cm",
-    "repository": "android_external_stlport",
-    "target_path": "external/stlport",
-    "branch": "cm-14.1"
-  },
-  {
-    "remote": "cm",
-    "repository": "android_external_connectivity",
-    "target_path": "external/connectivity",
-    "branch": "cm-14.1"
-  }  
+  }
 ]
