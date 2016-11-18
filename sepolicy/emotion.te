@@ -1,0 +1,48 @@
+#============= audioserver ==============
+allow audioserver qmuxd_socket:dir search;
+allow audioserver self:socket create;
+allow audioserver qmuxd_socket:dir write;
+allow audioserver self:socket ioctl;
+allow audioserver qmuxd_socket:dir add_name;
+allow audioserver qmuxd_socket:sock_file create;
+allow audioserver qmuxd_socket:sock_file { setattr write };
+allow audioserver self:socket read;
+allow audioserver qmuxd_socket:dir remove_name;
+allow audioserver qmuxd:unix_stream_socket connectto;
+
+#============= init ==============
+allow init sysfs_ss_writable:lnk_file read;
+
+#============= mediadrmserver ==============
+allow mediadrmserver firmware_file:dir search;
+
+#============= mdm_helper ==============
+allow mdm_helper diag_device:chr_file read;
+allow mdm_helper diag_device:chr_file open;
+
+#============= priv_app ==============
+allow priv_app device:dir read;
+allow priv_app device:dir open;
+
+#============= rild ==============
+allow rild default_prop:property_service set;
+
+#============= sensorhubservice ==============
+allow sensorhubservice device:chr_file { read write };
+allow sensorhubservice sysfs:file { read write };
+allow sensorhubservice device:chr_file open;
+allow sensorhubservice sysfs:file open;
+
+#============= system_server ==============
+allow system_server unlabeled:file unlink;
+
+#============= thermal-engine ==============
+allow thermal-engine self:netlink_kobject_uevent_socket create;
+allow thermal-engine self:netlink_kobject_uevent_socket { bind setopt };
+allow thermal-engine self:capability net_admin;
+allow thermal-engine self:netlink_kobject_uevent_socket read;
+
+#============= vcs ==============
+allow vcs ion_device:chr_file read; 
+allow vcs ion_device:chr_file open;
+allow vcs ion_device:chr_file ioctl;
