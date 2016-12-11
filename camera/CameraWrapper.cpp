@@ -30,7 +30,7 @@
 #include <utils/String8.h>
 #include <utils/threads.h>
 
-#define BACK_CAMERA_ID 0
+#define REAR_CAMERA_ID 0
 #define FRONT_CAMERA_ID 1
 
 using namespace android;
@@ -82,7 +82,7 @@ typedef struct wrapper_camera_device {
     __wrapper_dev->vendor->ops->func(__wrapper_dev->vendor, ##__VA_ARGS__); \
 })
 
-#define CAMERA_ID(device) (((wrapper_camera_device_t *)(device))->id)
+#define CAMERA_ID(device) (((wrapper_camera_device_t *)device)->id)
 
 static int check_vendor_module()
 {
@@ -100,61 +100,23 @@ static int check_vendor_module()
     return rv;
 }
 
-#define KEY_VIDEO_HFR_VALUES "video-hfr-values"
-
-// nv12-venus is needed for blobs, but
-// framework has no idea what it is
-#define PIXEL_FORMAT_NV12_VENUS "nv12-venus"
-
-static bool is_4k_video(CameraParameters &params) {
-    int video_width, video_height;
-    params.getVideoSize(&video_width, &video_height);
-    ALOGV("%s : VideoSize is %x", __FUNCTION__, video_width * video_height);
-    return video_width * video_height == 3840 * 2160;
-}
-
-static char *camera_fixup_getparams(int __attribute__((unused)) id,
-    const char *settings)
+static char *camera_fixup_getparams(int id, const char *settings)
 {
     CameraParameters params;
     params.unflatten(String8(settings));
 
-    ALOGV("%s: original parameters:", __FUNCTION__);
+    ALOGV("%s: Original parameters:", __FUNCTION__);
     params.dump();
 
-    params.set(CameraParameters::KEY_SUPPORTED_SCENE_MODES, "auto");
-
-    const char *recordHint = params.get(CameraParameters::KEY_RECORDING_HINT);
-    bool videoMode = recordHint ? !strcmp(recordHint, "true") : false;
-
-    //Hide nv12-venus from Android.
-    if (strcmp (params.getPreviewFormat(), PIXEL_FORMAT_NV12_VENUS) == 0)
-          params.setPreviewFormat(params.PIXEL_FORMAT_YUV420SP);
-
-    const char *videoSizeValues = params.get(
-            CameraParameters::KEY_SUPPORTED_VIDEO_SIZES);
-    if (videoSizeValues) {
-        char videoSizes[strlen(videoSizeValues) + 10 + 1];
-        sprintf(videoSizes, "3840x2160,%s", videoSizeValues);
-        params.set(CameraParameters::KEY_SUPPORTED_VIDEO_SIZES,
-                videoSizes);
+    /* Rear photos: Remove HDR scene mode */
+    if (id == REAR_CAMERA_ID) {
+        params.set(CameraParameters::KEY_SUPPORTED_SCENE_MODES,
+                "auto,action,night,sunset,party");
     }
 
-    /* If the vendor has HFR values but doesn't also expose that
-     * this can be turned off, fixup the params to tell the Camera
-     * that it really is okay to turn it off.
-     */
-    const char *hfrModeValues = params.get(KEY_VIDEO_HFR_VALUES);
-    if (hfrModeValues && !strstr(hfrModeValues, "off")) {
-        char hfrModes[strlen(hfrModeValues) + 4 + 1];
-        sprintf(hfrModes, "%s,off", hfrModeValues);
-        params.set(KEY_VIDEO_HFR_VALUES, hfrModes);
-    }
-
-    /* Enforce video-snapshot-supported to true */
-    if (videoMode) {
-        params.set(CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
-    }
+    /* Photos: Correct exposed ISO values */
+    params.set(CameraParameters::KEY_SUPPORTED_ISO_MODES,
+            "auto,ISO_HJR,ISO100,ISO200,ISO400,ISO800,ISO1600");
 
     ALOGV("%s: Fixed parameters:", __FUNCTION__);
     params.dump();
@@ -170,11 +132,31 @@ static char *camera_fixup_setparams(int id, const char *settings)
     CameraParameters params;
     params.unflatten(String8(settings));
 
-    ALOGV("%s: original parameters:", __FUNCTION__);
+    ALOGV("%s: Original parameters:", __FUNCTION__);
     params.dump();
 
-    const char *recordingHint = params.get(CameraParameters::KEY_RECORDING_HINT);
-    bool isVideo = recordingHint && !strcmp(recordingHint, "true");
+    const char *recordHint = params.get(CameraParameters::KEY_RECORDING_HINT);
+    bool isVideo = recordHint && !strcmp(recordHint, "true");
+
+    /* Rear videos: Correct camera mode to 0 */
+    if (isVideo && id == REAR_CAMERA_ID) {
+        params.set(CameraParameters::KEY_CAMERA_MODE, "0");
+    }
+
+    /* Photos: Map the corrected ISO values to the ones in the HAL */
+    const char *isoMode = params.get(CameraParameters::KEY_ISO_MODE);
+    if (isoMode) {
+        if (!strcmp(isoMode, "ISO100"))
+            params.set(CameraParameters::KEY_ISO_MODE, "100");
+        else if (!strcmp(isoMode, "ISO200"))
+            params.set(CameraParameters::KEY_ISO_MODE, "200");
+        else if (!strcmp(isoMode, "ISO400"))
+            params.set(CameraParameters::KEY_ISO_MODE, "400");
+        else if (!strcmp(isoMode, "ISO800"))
+            params.set(CameraParameters::KEY_ISO_MODE, "800");
+        else if (!strcmp(isoMode, "ISO1600"))
+            params.set(CameraParameters::KEY_ISO_MODE, "1600");
+    }
 
     ALOGV("%s: Fixed parameters:", __FUNCTION__);
     params.dump();
@@ -191,8 +173,6 @@ static char *camera_fixup_setparams(int id, const char *settings)
 /*******************************************************************
  * Implementation of camera_device_ops functions
  *******************************************************************/
-static char *camera_get_parameters(struct camera_device *device);
-static int camera_set_parameters(struct camera_device *device, const char *params);
 
 static int camera_set_preview_window(struct camera_device *device,
         struct preview_stream_ops *window)
@@ -312,15 +292,6 @@ static int camera_start_recording(struct camera_device *device)
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device,
             (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
 
-    CameraParameters parameters;
-    parameters.unflatten(String8(camera_get_parameters(device)));
-
-    if (is_4k_video(parameters)) {
-        ALOGV("%s : UHD detected, switching preview-format to nv12-venus", __FUNCTION__);
-        parameters.setPreviewFormat(PIXEL_FORMAT_NV12_VENUS);
-        camera_set_parameters(device, strdup(parameters.flatten().string()));
-    }
-
     return VENDOR_CALL(device, start_recording);
 }
 
@@ -427,7 +398,6 @@ static char *camera_get_parameters(struct camera_device *device)
     char *params = VENDOR_CALL(device, get_parameters);
 
     char *tmp = camera_fixup_getparams(CAMERA_ID(device), params);
-
     VENDOR_CALL(device, put_parameters, params);
     params = tmp;
 

@@ -1247,9 +1247,9 @@ service fingerprintd /system/bin/fingerprintd
     group input
 
 service qcamerasvr /system/bin/mm-qcamera-daemon
-    class late_start
+    class main
     user camera
-    group camera system inet input graphics
+    group camera system inet input graphics net_bt_stack
 
     writepid /dev/cpuset/system-background/tasks
 
