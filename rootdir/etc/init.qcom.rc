@@ -496,19 +496,34 @@ on boot
     chown bluetooth bluetooth /dev/btlock
 
     #Create QMUX deamon socket area
-    mkdir /dev/socket/qmux_radio 0770 radio radio
-    chmod 2770 /dev/socket/qmux_radio
-    mkdir /dev/socket/qmux_audio 0770 media audio
-    chmod 2770 /dev/socket/qmux_audio
-    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
-    chmod 2770 /dev/socket/qmux_bluetooth
-    mkdir /dev/socket/qmux_gps 0770 gps gps
-    chmod 2770 /dev/socket/qmux_gps
+    mkdir /dev/socket/qmux_radio 2777 radio radio
+    mkdir /dev/socket/qmux_audio 2777 media audio
+    mkdir /dev/socket/qmux_gps 2777 gps gps
+    mkdir /dev/socket/qmux_bluetooth 2777 bluetooth bluetooth
+
+    chmod 0666 /dev/socket/qmux_bluetooth/qmux_connect_socket
+    chown media bluetooth /dev/socket/qmux_bluetooth/qmux_connect_socket
+
+    chmod 0666 /dev/socket/qmux_gps/qmux_connect_socket
+    chown gps gps /dev/socket/qmux_gps/qmux_connect_socket
+
+    chmod 0666 /dev/socket/qmux_audio/qmux_connect_socket
+    chown media audio /dev/socket/qmux_audio/qmux_connect_socket
+
+    chmod 0666 /dev/socket/qmux_radio/qmux_connect_socket
+    chown radio radio /dev/socket/qmux_radio/qmux_connect_socket
+
+    chmod 0666 /dev/socket/qmux_radio/proxy_qmux_connect_socket
+    chown radio radio /dev/socket/qmux_radio/proxy_qmux_connect_socket
+
+    chmod 0666 /dev/socket/qmux_radio/proxy_tether_connect_socket
+    chown radio radio /dev/socket/qmux_radio/proxy_tether_connect_socket
 
     setprop wifi.interface wlan0
 
     # Allow QMUX daemon to assign port open wait time
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
+    chmod 666 /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
     # 4.3 requires this
     chmod 0644 /proc/cmdline
@@ -1264,7 +1279,7 @@ service qseecomd /system/bin/qseecomd
 service mpdecision /system/bin/mpdecision --avg_comp
     class main
     user root
-    group system
+    group root system readproc
     writepid /dev/cpuset/system-background/tasks
     disabled
 
