@@ -83,8 +83,8 @@ TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_CONFIG := emotion_cm_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/trlte
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
-TARGET_SM_KERNEL := 4.8
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
