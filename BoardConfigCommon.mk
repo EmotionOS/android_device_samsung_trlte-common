@@ -130,9 +130,6 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += \
     device/samsung/trlte-common/sepolicy
 
-# Use Snapdragon LLVM, if available
-TARGET_USE_SDCLANG := true    
-    
 # Time
 BOARD_USES_QC_TIME_SERVICES := true
 
