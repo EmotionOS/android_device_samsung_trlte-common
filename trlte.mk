@@ -111,6 +111,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/iop_bt.db:/system/etc/bluetooth/iop_bt.db
 
+# Boot animation
+TARGET_BOOTANIMATION_HALF_RES := true		
+	
 # Camera
 PRODUCT_PACKAGES += \
     camera.apq8084 \
