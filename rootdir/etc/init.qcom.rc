@@ -1578,14 +1578,8 @@ on property:sys.boot_completed=1
     chown system radio /sys/class/sec/sec_epen/boost_level
 
     # Post boot services
-    #start mpdecision
+    start mpdecision
     rm /data/system/perfd/default_values
-
-    # Enable msm hotplug for boot
-    write /sys/module/msm_hotplug/msm_enabled 1
-    write /sys/module/msm_hotplug/cpus_boosted 2
-    write /sys/module/msm_hotplug/max_cpus_online 4
-    write /sys/module/msm_hotplug/min_cpus_online 2
     
     # Symlink telephony.db and preferred-apn.xml
     mkdir /data/user/0/com.android.providers.telephony/databases 0700 radio radio
