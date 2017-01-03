@@ -17,7 +17,7 @@
  */
 
 #include "fingerprint_common.h"
-#include "vfs61xx_ioctl.h"
+#include "vfs7xxx_ioctl.h"
 
 #define FINGER_DATABASE_FILENAME "/data/validity/finger.db"
 #define SAMSUNG_FP_DB_PATH "/data/validity/template.db"

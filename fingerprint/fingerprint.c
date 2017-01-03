@@ -107,14 +107,14 @@ void sensor_process_signal(int signum) {
 
 int sensor_register() {
     ALOGV("----------------> %s ----------------->", __FUNCTION__);
-    struct vfsspi_iocRegSignal usrSignal;
+    struct vfsspi_ioctl_register_signal usrSignal;
     int ret = 0;
     struct sigaction sa_usr;
     sa_usr.sa_flags = 0;
     sa_usr.sa_handler = sensor_process_signal;
     sigaction(SIGUSR2, &sa_usr, NULL);
-    usrSignal.userPID = getpid();
-    usrSignal.signalID = SIGUSR2;
+    usrSignal.user_pid = getpid();
+    usrSignal.signal_id = SIGUSR2;
     ioctl(sensor.fd, VFSSPI_IOCTL_REGISTER_DRDY_SIGNAL, &usrSignal);
     return ret;
 }
