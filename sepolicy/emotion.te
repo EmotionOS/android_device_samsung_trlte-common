@@ -57,6 +57,7 @@ allow untrusted_app rootfs:dir open;
 allow untrusted_app firmware_file:dir open;
 allow untrusted_app cgroup:dir read;
 allow untrusted_app cgroup:dir open;
+allow untrusted_app cm_status_bar_service:service_manager find;
 
 #============= vcs ==============
 allow vcs ion_device:chr_file read; 
