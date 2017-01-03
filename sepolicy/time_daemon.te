@@ -4,4 +4,5 @@ allow time_daemon system_server:dir search;
 allow time_daemon system_server:file { read open };
 allow time_daemon system_app:dir search;
 allow time_daemon system_app:file { read open };
+allow time_daemon system_data_file:file append;
 
