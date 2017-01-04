@@ -40,9 +40,15 @@ allow sensorhubservice sysfs:file { read write };
 allow sensorhubservice device:chr_file open;
 allow sensorhubservice sysfs:file open;
 
+#============= shell ==============
+allow shell dalvikcache_data_file:dir write;
+allow shell self:capability dac_override;
+allow shell dalvikcache_data_file:dir add_name;
+
 #============= system_server ==============
 allow system_server unlabeled:file unlink;
 allow system_server sensors_efs_file:file read;
+allow system_server sensors_efs_file:file open;
 
 #============= thermal-engine ==============
 allow thermal-engine self:netlink_kobject_uevent_socket create;
@@ -58,6 +64,7 @@ allow untrusted_app firmware_file:dir open;
 allow untrusted_app cgroup:dir read;
 allow untrusted_app cgroup:dir open;
 allow untrusted_app cm_status_bar_service:service_manager find;
+allow untrusted_app sysfs:file read;
 
 #============= vcs ==============
 allow vcs ion_device:chr_file read; 
