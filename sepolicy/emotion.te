@@ -10,6 +10,11 @@ allow audioserver self:socket read;
 allow audioserver qmuxd_socket:dir remove_name;
 allow audioserver qmuxd:unix_stream_socket connectto;
 
+#============= fingerprintd ==============
+allow fingerprintd devpts:chr_file { read write };
+allow fingerprintd self:capability dac_override;
+allow fingerprintd untrusted_app_devpts:chr_file { read write };
+
 #============= init ==============
 allow init sysfs_ss_writable:lnk_file read;
 
@@ -55,6 +60,10 @@ allow thermal-engine self:netlink_kobject_uevent_socket create;
 allow thermal-engine self:netlink_kobject_uevent_socket { bind setopt };
 allow thermal-engine self:capability net_admin;
 allow thermal-engine self:netlink_kobject_uevent_socket read;
+
+#============= time_daemon ==============
+allow time_daemon devpts:chr_file { read write };
+allow time_daemon untrusted_app_devpts:chr_file { read write };
 
 #============= untrusted_app ==============
 allow untrusted_app rootfs:dir read;
