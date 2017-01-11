@@ -36,6 +36,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.enable_vds \
     sdm.perf_hint_window=50 \
     ro.opengles.version=196608 \
+    
+# Enable Google Assistant
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.opa.eligible_device=true
 
 # Gps
 PRODUCT_PROPERTY_OVERRIDES += \
