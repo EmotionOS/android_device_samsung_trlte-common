@@ -823,8 +823,6 @@ on boot
    chown system system /sys/devices/fe12f000.slim/es705-codec-gen0/keyword_grammar_path
    chown system system /sys/devices/fe12f000.slim/es705-codec-gen0/keyword_net_path
 
-# Fingerprint_sensor
-    chown system radio /sys/class/fingerprint/fingerprint/type_check
 # Accelerometer_sensor
     chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
     chown system radio /sys/class/sensors/accelerometer_sensor/calibration
@@ -1268,9 +1266,9 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 #    group gps qcom_oncrpc
 
 service qseecomd /system/bin/qseecomd
-    class core
+    class late_start
     user root
-    group root
+    group system
 
 service mpdecision /system/bin/mpdecision --avg_comp
     class main

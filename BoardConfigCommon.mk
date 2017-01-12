@@ -88,6 +88,9 @@ TARGET_KERNEL_SOURCE := kernel/samsung/trlte
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 
+#Keymaster
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
