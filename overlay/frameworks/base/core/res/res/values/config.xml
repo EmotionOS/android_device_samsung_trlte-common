@@ -372,6 +372,9 @@
          config to 7. -->
     <integer name="config_deviceHardwareWakeKeys">65</integer>
 
+    <!-- Hardware keys on/off option -->
+    <bool name="config_hwKeysPref">true</bool>
+
     <!-- Enable doze powersaving -->
     <bool name="config_enableWifiDisplay">true</bool>
 
