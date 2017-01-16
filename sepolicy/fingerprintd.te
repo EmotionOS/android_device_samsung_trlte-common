@@ -1,2 +1,20 @@
 allow fingerprintd system_app:unix_stream_socket { connectto read write setopt };
 allow fingerprintd system_app:unix_stream_socket connectto;
+
+allow fingerprintd vcs_data_file:dir create_dir_perms;
+allow fingerprintd vcs_data_file:file create_file_perms;
+
+allow fingerprintd vcs_device:dir create_dir_perms;
+allow fingerprintd vcs_device:file create_file_perms;
+allow fingerprintd vcs_device:fifo_file create_file_perms;
+allow fingerprintd vcs_device:chr_file create_file_perms;
+
+allow fingerprintd tee_device:chr_file rw_file_perms;
+
+allow fingerprintd firmware_file:dir r_dir_perms;
+allow fingerprintd firmware_file:file r_file_perms;
+
+allow fingerprintd vfat:file { getattr open read };
+allow fingerprintd devpts:chr_file { read write };
+allow fingerprintd self:capability dac_override;
+allow fingerprintd untrusted_app_devpts:chr_file { read write };
