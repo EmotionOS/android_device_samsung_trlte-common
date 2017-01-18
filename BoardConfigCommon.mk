@@ -24,9 +24,6 @@ TARGET_CPU_VARIANT := krait
 
 ENABLE_CPUSETS := true
 
-# L1/L2 cache size parameters by @JustArchi
-BOARD_GLOBAL_CFLAGS := --param l1-cache-size=32 --param l1-cache-line-size=16 --param l2-cache-size=2048
-
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_HWDEP_CAL := true
@@ -52,7 +49,7 @@ TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # RIL
 TARGET_GLOBAL_CFLAGS += -DUSE_RIL_VERSION_10
-TARGEt_GLOBAL_CPPFLAGS += -DUSE_RIL_VERSION_10
+TARGET_GLOBAL_CPPFLAGS += -DUSE_RIL_VERSION_10
 TARGET_RIL_VARIANT := caf
 
 # Charger
