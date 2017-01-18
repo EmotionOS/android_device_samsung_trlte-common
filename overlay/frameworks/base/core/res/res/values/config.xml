@@ -431,5 +431,11 @@
          don't support RIL_REQUEST_GET_RADIO_CAPABILITY
          format is UMTS|LTE|... -->
     <string translatable="false" name="config_radio_access_family">GSM | WCDMA | LTE | CDMA | EVDO</string>
+    
+     <!-- Certain sensor firmwares break with having a batch
+          size set. By setting this to false, devices can opt
+          out of setting a batch size, which fixes rotation. -->
+     <bool name="config_useDefaultBatchingForAccel">false</bool>
+ 
 
 </resources>
