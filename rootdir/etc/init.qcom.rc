@@ -519,7 +519,7 @@ on boot
 
     chmod 0666 /dev/socket/qmux_radio/proxy_tether_connect_socket
     chown radio radio /dev/socket/qmux_radio/proxy_tether_connect_socket
-
+    
     setprop wifi.interface wlan0
 
     # Allow QMUX daemon to assign port open wait time
