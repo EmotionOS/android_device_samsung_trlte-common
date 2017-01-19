@@ -122,6 +122,12 @@ allow rild system_data_file:sock_file { create setattr unlink };
 allow rild tee:file { getattr open read };
 allow rild ueventd:file { getattr open read };
 allow rild vold:file { getattr open read };
+allow rild persist_file:dir search;
+allow rild qmuxd:file read;
+allow rild radio:file read;
 
 #============= vold ==============
 allow vold self:capability sys_resource;
+
+#========== netmgrd =========
+allow netmgrd self:capability dac_override;
