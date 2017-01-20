@@ -6,3 +6,6 @@ allow time_daemon system_app:dir search;
 allow time_daemon system_app:file { read open };
 allow time_daemon system_data_file:file append;
 allow time_daemon qmuxd_socket:dir search;
+allow time_daemon qmuxd_socket:dir write;
+qmux_socket(time_daemon)
+
