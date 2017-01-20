@@ -425,14 +425,12 @@ on early-boot
 on boot
 
     # CPU Sets
-
-    write /dev/cpuset/foreground/cpus 0-3
     # reserve CPU 3 for the top app
     write /dev/cpuset/foreground/cpus 0-2
     write /dev/cpuset/foreground/boost/cpus 0-3
     write /dev/cpuset/background/cpus 0
-    write /dev/cpuset/top-app/cpus 0-3
     write /dev/cpuset/system-background/cpus 0-1
+    write /dev/cpuset/top-app/cpus 0-3
     write /dev/cpuctl/cpu.shares 1024
 
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -541,9 +539,6 @@ on boot
     chmod 0755 /system/bin/ip
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
-
-    #For bridgemgr daemon to inform the USB driver of the correct transport
-    chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
     chown radio radio /sys/class/net/rmnet_usb0/queues/rx-0/rps_cpus
     chmod 664 /sys/class/net/rmnet_usb0/queues/rx-0/rps_cpus

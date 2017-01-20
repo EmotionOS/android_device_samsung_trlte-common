@@ -132,3 +132,10 @@ allow vold self:capability sys_resource;
 
 #========== netmgrd =========
 allow netmgrd self:capability dac_override;
+
+#========= system_app ========
+allow system_app netd_service:service_manager find;
+allow system_app sensorhubservice:binder call;
+allow system_app fingerprintd:binder call;
+
+allow qti_init_shell sysfs_usb:file write;
