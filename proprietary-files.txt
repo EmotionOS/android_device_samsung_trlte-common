@@ -385,7 +385,6 @@ vendor/lib/libdisp-aba.so
 vendor/lib/libmm-abl-oem.so
 
 # Qualcomm
-vendor/lib/libxml.so
 lib/libxml2.so
 
 # Sensors
@@ -407,8 +406,8 @@ vendor/lib/libTimeService.so
 -vendor/lib/libtime_genoff.so
 
 # Bluetooth firmware
--vendor/firmware/bcm4358A1_V0051.0083.hcd
--vendor/firmware/bcm4358A1_V0051.0083_wisol.hcd
+vendor/firmware/bcm4358A1_V0054.0095.hcd
+vendor/firmware/bcm4358A1_V0054.0095_wisol.hcd
 
 # Wi-Fi
 bin/olsrd

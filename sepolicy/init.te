@@ -8,4 +8,5 @@ allow init userdata_block_device:blk_file rw_file_perms;
 allow init cache_block_device:blk_file rw_file_perms;
 allow init cgroup:dir create_dir_perms;
 allow init radio_data_file:lnk_file read;
+allow init debugfs:file write;
 
