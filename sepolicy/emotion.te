@@ -70,9 +70,8 @@ allow sensorhubservice device:chr_file open;
 allow sensorhubservice sysfs:file open;
 
 #============= shell ==============
-allow shell dalvikcache_data_file:dir write;
-allow shell self:capability dac_override;
-allow shell dalvikcache_data_file:dir add_name;
+# Hits neverallow: allow shell dalvikcache_data_file:dir { add_name write };
+# Hits neverallow: allow shell self:capability dac_override;
 
 #============= system_server ==============
 allow system_server unlabeled:file unlink;
@@ -134,7 +133,7 @@ allow vold self:capability sys_resource;
 allow netmgrd self:capability dac_override;
 
 #========= system_app ========
-allow system_app netd_service:service_manager find;
+# Hits neverallow: allow system_app netd_service:service_manager find;
 allow system_app sensorhubservice:binder call;
 allow system_app fingerprintd:binder call;
 
