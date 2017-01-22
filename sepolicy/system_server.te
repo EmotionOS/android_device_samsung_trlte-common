@@ -10,4 +10,6 @@ allow system_server vibe_dev:file rw_file_perms;
 allow system_server lcd_dev:file rw_file_perms;
 allow system_server wifi_efs_file:file r_file_perms;
 allow system_server keypad_dev:file rw_file_perms;
+allow system_server zygote:binder call;
+
 
