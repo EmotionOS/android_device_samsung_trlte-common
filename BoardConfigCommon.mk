@@ -122,6 +122,9 @@ TARGET_GLOBAL_CFLAGS += -DQCOM_BSP
 TARGET_USES_QCOM_BSP := true
 BOARD_USES_QCOM_HARDWARE := true
 
+# RIL
+BOARD_RIL_CLASS := ../../../device/samsung/trlte-common/ril
+
 # Recovery
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.qcom
 TARGET_USERIMAGES_USE_EXT4 := true
