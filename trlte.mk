@@ -116,7 +116,8 @@ TARGET_BOOTANIMATION_HALF_RES := true
 PRODUCT_PACKAGES += \
     camera.apq8084 \
     libstlport \
-    libxml2
+    libxml2 \
+    SnapdragonCamera
 
 # Charger
 PRODUCT_PACKAGES += \
