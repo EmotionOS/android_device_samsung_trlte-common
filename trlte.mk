@@ -115,7 +115,6 @@ TARGET_BOOTANIMATION_HALF_RES := true
 # Camera
 PRODUCT_PACKAGES += \
     camera.apq8084 \
-    libstlport \
     libxml2 \
     SnapdragonCamera
 
