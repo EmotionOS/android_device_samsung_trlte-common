@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016, The CyanogenMod Project
+ *           (C) 2017, The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,11 +31,8 @@
 #include <utils/String8.h>
 #include <utils/threads.h>
 
-#define REAR_CAMERA_ID 0
+#define BACK_CAMERA_ID 0
 #define FRONT_CAMERA_ID 1
-
-#define OPEN_RETRIES    10
-#define OPEN_RETRY_MSEC 40
 
 using namespace android;
 
@@ -49,7 +47,7 @@ static int camera_get_number_of_cameras(void);
 static int camera_get_camera_info(int camera_id, struct camera_info *info);
 
 static struct hw_module_methods_t camera_module_methods = {
-    .open = camera_device_open
+    .open = camera_device_open,
 };
 
 camera_module_t HAL_MODULE_INFO_SYM = {
@@ -58,20 +56,20 @@ camera_module_t HAL_MODULE_INFO_SYM = {
          .module_api_version = CAMERA_MODULE_API_VERSION_1_0,
          .hal_api_version = HARDWARE_HAL_API_VERSION,
          .id = CAMERA_HARDWARE_MODULE_ID,
-         .name = "Samsung Camera Wrapper",
-         .author = "The CyanogenMod Project",
+         .name = "trlte Camera Wrapper",
+         .author = "The LineageOS Project",
          .methods = &camera_module_methods,
-         .dso = NULL, /* remove compilation warnings */
-         .reserved = {0}, /* remove compilation warnings */
+         .dso = NULL,
+         .reserved = {0},
     },
     .get_number_of_cameras = camera_get_number_of_cameras,
     .get_camera_info = camera_get_camera_info,
-    .set_callbacks = NULL, /* remove compilation warnings */
-    .get_vendor_tag_ops = NULL, /* remove compilation warnings */
-    .open_legacy = NULL, /* remove compilation warnings */
-    .set_torch_mode = NULL, /* remove compilation warnings */
-    .init = NULL, /* remove compilation warnings */
-    .reserved = {0}, /* remove compilation warnings */
+    .set_callbacks = NULL,
+    .get_vendor_tag_ops = NULL,
+    .open_legacy = NULL,
+    .set_torch_mode = NULL,
+    .init = NULL,
+    .reserved = {0},
 };
 
 typedef struct wrapper_camera_device {
@@ -103,23 +101,59 @@ static int check_vendor_module()
     return rv;
 }
 
-static char *camera_fixup_getparams(int id, const char *settings)
+#define KEY_VIDEO_HFR_VALUES "video-hfr-values"
+
+// nv12-venus is needed for blobs, but
+// framework has no idea what it is
+#define PIXEL_FORMAT_NV12_VENUS "nv12-venus"
+
+static bool is_4k_video(CameraParameters &params) {
+    int video_width, video_height;
+    params.getVideoSize(&video_width, &video_height);
+    ALOGV("%s : VideoSize is %x", __FUNCTION__, video_width * video_height);
+    return video_width * video_height == 3840 * 2160;
+}
+
+static char *camera_fixup_getparams(int __attribute__((unused)) id,
+    const char *settings)
 {
     CameraParameters params;
     params.unflatten(String8(settings));
 
-    ALOGV("%s: Original parameters:", __FUNCTION__);
+    ALOGV("%s: original parameters:", __FUNCTION__);
     params.dump();
 
-    /* Rear photos: Remove HDR scene mode */
-    if (id == REAR_CAMERA_ID) {
-        params.set(CameraParameters::KEY_SUPPORTED_SCENE_MODES,
-                "auto,action,night,sunset,party");
+    const char *recordHint = params.get(CameraParameters::KEY_RECORDING_HINT);
+    bool videoMode = recordHint ? !strcmp(recordHint, "true") : false;
+
+    //Hide nv12-venus from Android.
+    if (strcmp (params.getPreviewFormat(), PIXEL_FORMAT_NV12_VENUS) == 0)
+          params.setPreviewFormat(params.PIXEL_FORMAT_YUV420SP);
+
+    const char *videoSizeValues = params.get(
+            CameraParameters::KEY_SUPPORTED_VIDEO_SIZES);
+    if (videoSizeValues) {
+        char videoSizes[strlen(videoSizeValues) + 10 + 1];
+        sprintf(videoSizes, "3840x2160,%s", videoSizeValues);
+        params.set(CameraParameters::KEY_SUPPORTED_VIDEO_SIZES,
+                videoSizes);
     }
 
-    /* Photos: Correct exposed ISO values */
-    params.set(CameraParameters::KEY_SUPPORTED_ISO_MODES,
-            "auto,ISO_HJR,ISO100,ISO200,ISO400,ISO800,ISO1600");
+    /* If the vendor has HFR values but doesn't also expose that
+     * this can be turned off, fixup the params to tell the Camera
+     * that it really is okay to turn it off.
+     */
+    const char *hfrModeValues = params.get(KEY_VIDEO_HFR_VALUES);
+    if (hfrModeValues && !strstr(hfrModeValues, "off")) {
+        char hfrModes[strlen(hfrModeValues) + 4 + 1];
+        sprintf(hfrModes, "%s,off", hfrModeValues);
+        params.set(KEY_VIDEO_HFR_VALUES, hfrModes);
+    }
+
+    /* Enforce video-snapshot-supported to true */
+    if (videoMode) {
+        params.set(CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
+    }
 
     ALOGV("%s: Fixed parameters:", __FUNCTION__);
     params.dump();
@@ -135,33 +169,33 @@ static char *camera_fixup_setparams(int id, const char *settings)
     CameraParameters params;
     params.unflatten(String8(settings));
 
-    ALOGV("%s: Original parameters:", __FUNCTION__);
+    ALOGV("%s: original parameters:", __FUNCTION__);
     params.dump();
 
-    const char *recordHint = params.get(CameraParameters::KEY_RECORDING_HINT);
-    bool isVideo = recordHint && !strcmp(recordHint, "true");
+    bool wasTorch = false;
+    if (fixed_set_params[id]) {
+        /* When torch mode is switched off, it is important not to set ZSL, to
+           avoid a segmentation violation in libcameraservice.so. Hence, check
+           if the last call to setparams enabled torch mode */
+        CameraParameters old_params;
+        old_params.unflatten(String8(fixed_set_params[id]));
 
-    /* Rear videos: Correct camera mode to 0 */
-    if (isVideo && id == REAR_CAMERA_ID) {
-        params.set(CameraParameters::KEY_CAMERA_MODE, "0");
-        params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_OFF);
-    } else {
-        params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_ON);
+        const char *old_flashMode = old_params.get(CameraParameters::KEY_FLASH_MODE);
+        wasTorch = old_flashMode && !strcmp(old_flashMode, CameraParameters::FLASH_MODE_TORCH);
     }
 
-    /* Photos: Map the corrected ISO values to the ones in the HAL */
-    const char *isoMode = params.get(CameraParameters::KEY_ISO_MODE);
-    if (isoMode) {
-        if (!strcmp(isoMode, "ISO100"))
-            params.set(CameraParameters::KEY_ISO_MODE, "100");
-        else if (!strcmp(isoMode, "ISO200"))
-            params.set(CameraParameters::KEY_ISO_MODE, "200");
-        else if (!strcmp(isoMode, "ISO400"))
-            params.set(CameraParameters::KEY_ISO_MODE, "400");
-        else if (!strcmp(isoMode, "ISO800"))
-            params.set(CameraParameters::KEY_ISO_MODE, "800");
-        else if (!strcmp(isoMode, "ISO1600"))
-            params.set(CameraParameters::KEY_ISO_MODE, "1600");
+    const char *recordingHint = params.get(CameraParameters::KEY_RECORDING_HINT);
+    bool isVideo = recordingHint && !strcmp(recordingHint, "true");
+    const char *flashMode = params.get(CameraParameters::KEY_FLASH_MODE);
+    bool isTorch = flashMode && !strcmp(flashMode, CameraParameters::FLASH_MODE_TORCH);
+
+    if (!isTorch && !wasTorch) {
+        if (isVideo) {
+            params.set(CameraParameters::KEY_DIS, CameraParameters::DIS_DISABLE);
+            params.set(CameraParameters::KEY_ZSL, CameraParameters::ZSL_OFF);
+        } else {
+            params.set(CameraParameters::KEY_ZSL, CameraParameters::ZSL_ON);
+        }
     }
 
     ALOGV("%s: Fixed parameters:", __FUNCTION__);
@@ -179,6 +213,8 @@ static char *camera_fixup_setparams(int id, const char *settings)
 /*******************************************************************
  * Implementation of camera_device_ops functions
  *******************************************************************/
+static char *camera_get_parameters(struct camera_device *device);
+static int camera_set_parameters(struct camera_device *device, const char *params);
 
 static int camera_set_preview_window(struct camera_device *device,
         struct preview_stream_ops *window)
@@ -298,6 +334,15 @@ static int camera_start_recording(struct camera_device *device)
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device,
             (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
 
+    CameraParameters parameters;
+    parameters.unflatten(String8(camera_get_parameters(device)));
+
+    if (is_4k_video(parameters)) {
+        ALOGV("%s : UHD detected, switching preview-format to nv12-venus", __FUNCTION__);
+        parameters.setPreviewFormat(PIXEL_FORMAT_NV12_VENUS);
+        camera_set_parameters(device, strdup(parameters.flatten().string()));
+    }
+
     return VENDOR_CALL(device, start_recording);
 }
 
@@ -404,6 +449,7 @@ static char *camera_get_parameters(struct camera_device *device)
     char *params = VENDOR_CALL(device, get_parameters);
 
     char *tmp = camera_fixup_getparams(CAMERA_ID(device), params);
+
     VENDOR_CALL(device, put_parameters, params);
     params = tmp;
 
@@ -543,16 +589,9 @@ static int camera_device_open(const hw_module_t *module, const char *name,
         memset(camera_device, 0, sizeof(*camera_device));
         camera_device->id = camera_id;
 
-        int retries = OPEN_RETRIES;
-        bool retry;
-        do {
-            rv = gVendorModule->common.methods->open(
-                    (const hw_module_t*)gVendorModule, name,
-                    (hw_device_t**)&(camera_device->vendor));
-            retry = --retries > 0 && rv;
-            if (retry)
-                usleep(OPEN_RETRY_MSEC * 1000);
-        } while (retry);
+        rv = gVendorModule->common.methods->open(
+                (const hw_module_t*)gVendorModule, name,
+                (hw_device_t**)&(camera_device->vendor));
         if (rv) {
             ALOGE("Vendor camera open fail");
             goto fail;
