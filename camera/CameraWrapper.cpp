@@ -141,6 +141,9 @@ static char *camera_fixup_setparams(int id, const char *settings)
     /* Rear videos: Correct camera mode to 0 */
     if (isVideo && id == REAR_CAMERA_ID) {
         params.set(CameraParameters::KEY_CAMERA_MODE, "0");
+        params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_OFF);
+    } else {
+        params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_ON);
     }
 
     /* Photos: Map the corrected ISO values to the ones in the HAL */
