@@ -117,6 +117,8 @@ EnforceMasterRole KEY_BDADDR="00:1a:0e:*" KEY_LMP_MFCT="10" KEY_LMP_VER="3:2625"
 /* Motorola HT820 */
 EnforceMasterRole KEY_BDADDR="00:07:a4:*" KEY_LMP_MFCT="10" KEY_LMP_VER="2:2660"
 
+/* SRS-X10 */
+EnforceMasterRole KEY_BDADDR="b8:69:c2:*"
 #---------------------------------------------------------------------
 # :: Delayed role switch exception
 #
@@ -363,7 +365,10 @@ ProcessAvrcKey KEY_BDADDR="9c:df:03:*"
 ProcessAvrcKey KEY_BDADDR="e0:75:0a:*"
 /* My Car (Nissan) */
 ProcessAvrcKey KEY_BDADDR="00:09:93:*"
-/*  FIAT VP2 (Uconnect) */ProcessAvrcKey KEY_BDADDR="9c:28:bf:*"/* Audi02 */ProcessAvrcKey KEY_BDADDR="ac:7a:4d:*"
+/*  FIAT VP2 (Uconnect) */
+ProcessAvrcKey KEY_BDADDR="9c:28:bf:*"
+/* Audi02 */
+ProcessAvrcKey KEY_BDADDR="ac:7a:4d:*"
 /* MY10 Mitsu MDG(Hands Free System)*/
 ProcessAvrcKey KEY_BDADDR="51:30:26:*"
 #---------------------------------------------------------------------
@@ -574,3 +579,37 @@ AvoidAlertingCarkit KEY_BDADDR="e0:75:0a:*"
 AvoidAlertingCarkit KEY_BDADDR="04:76:6e:*"
 /* Toyota Sienna (Dallas) */
 AvoidAlertingCarkit KEY_BDADDR="64:d4:bd:*"
+
+#----------------------------------------------------------------------
+#   :: Exception to timeout while SLC 
+#
+#      AVAILABLE KEYS :
+#
+#         KEY_BDADDR     : Remote bd address
+
+/* JB LAB Carkit */
+ExceptSLCTimeout KEY_BDADDR="00:0D:18:*"
+
+#----------------------------------------------------------------------
+#   :: Exception to allow sniff mode while sco connection
+#
+#      AVAILABLE KEYS :
+#
+#         KEY_DID_VND_ID     : Remote vendor id
+#         KEY_START_PROD_ID  : Range of Remote product id (start)
+#         KEY_END_PROD_ID    : Range of Remote product id (end)
+
+/* Level U (VID 117, PID 40976~40991) */
+AllowedScoSniffMode KEY_DID_VND_ID="117" KEY_START_PROD_ID="42241" KEY_END_PROD_ID="42250"
+/* Gear (VID 117, PID 42241~42250) */
+AllowedScoSniffMode KEY_DID_VND_ID="117" KEY_START_PROD_ID="40976" KEY_END_PROD_ID="40991"
+
+#----------------------------------------------------------------------
+#   :: Exception to avoid In-band Ringtone
+#
+#      AVAILABLE KEYS :
+#
+#         KEY_BDADDR     : Remote bd address
+
+/* None */
+AvoidInBandRingtone KEY_BDADDR="FF:FF:FF:*"
