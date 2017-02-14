@@ -271,6 +271,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     librmnetctl \
+    rmnetcli \
     librmt_shim \
     libprotobuf-cpp-full
 
