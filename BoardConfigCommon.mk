@@ -115,7 +115,10 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 26558312448
 TARGET_BOARD_PLATFORM := apq8084
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno420
 
-#  Power HAL not specified, we're using the one in trlte-common instead.
+
+# Power HAL
+TARGET_POWERHAL_VARIANT := qcom
+TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
 
 # Data services
 USE_DEVICE_SPECIFIC_DATASERVICES := true
