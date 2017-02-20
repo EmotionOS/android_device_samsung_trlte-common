@@ -116,7 +116,7 @@ TARGET_BOOTANIMATION_HALF_RES := true
 PRODUCT_PACKAGES += \
     camera.apq8084 \
     libxml2 \
-    SnapdragonCamera
+    Snap
 
 # Charger
 PRODUCT_PACKAGES += \
