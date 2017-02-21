@@ -436,6 +436,8 @@
           size set. By setting this to false, devices can opt
           out of setting a batch size, which fixes rotation. -->
      <bool name="config_useDefaultBatchingForAccel">false</bool>
- 
+     
+     <!-- Enable blur support -->
+    <bool name="config_uiBlurEnabled">true</bool>
 
 </resources>
