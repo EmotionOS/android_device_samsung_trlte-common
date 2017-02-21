@@ -14,4 +14,5 @@ allow macloader system_file:file execute_no_trans;
 type_transition macloader system_data_file:file wifi_data_file;
 allow macloader system_data_file:dir { search add_name write };
 allow macloader wifi_data_file:file { create_file_perms getattr setattr };
-allow macloader sysfs:file { write };
+allow macloader sysfs:file rw_file_perms;
+
