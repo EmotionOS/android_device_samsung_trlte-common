@@ -1300,11 +1300,11 @@ service qseecomd /system/bin/qseecomd
     user root
     group system
 
-service mpdecision /system/bin/mpdecision --avg_comp
-    class main
-    user root
-    group root readproc
-    disabled
+#service mpdecision /system/bin/mpdecision --avg_comp
+#    class main
+#    user root
+#    group root readproc
+#    disabled
 
 service sensorhubservice /system/bin/sensorhubservice
     class main
