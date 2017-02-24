@@ -1,0 +1,14 @@
+allow untrusted_app tombstone_data_file:dir { getattr search };
+allow untrusted_app efs_file:dir { getattr search };
+allow untrusted_app efs_file:file getattr;
+allow untrusted_app rootfs:dir { read open };
+allow untrusted_app unlabeled:dir getattr;
+allow untrusted_app firmware_file:dir { open search };
+allow untrusted_app firmware_file:file getattr;
+allow untrusted_app device:dir { read open };
+allow untrusted_app block_device:dir { read open };
+allow untrusted_app sysfs:file read;
+
+# >neverallow< allow untrusted_app fuse_device:chr_file getattr;
+# >neverallow< allow untrusted_app efs_file:file read;
+
