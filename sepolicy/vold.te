@@ -1,3 +1,4 @@
 allow vold persist_file:dir r_file_perms;
 allow vold storage_stub_file:dir read;
-allow vold efs_file:dir r_file_perms;
+allow vold efs_file:dir { r_file_perms search };
+allow vold cache_file:dir create;

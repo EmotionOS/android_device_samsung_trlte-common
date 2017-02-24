@@ -1,0 +1,9 @@
+allow priv_app device:dir { read open };
+allow priv_app cache_private_backup_file:dir getattr;
+allow priv_app firmware_file:dir { read search open };
+allow priv_app firmware_file:file getattr;
+allow priv_app mnt_media_rw_file:dir getattr;
+allow priv_app configfs:dir { read open search};
+allow priv_app efs_file:dir getattr;
+allow priv_app unlabeled:dir getattr;
+allow priv_app audio_data_file:dir search;
