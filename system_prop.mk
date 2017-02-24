@@ -115,3 +115,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Burn-in protection
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.systemui.burn_in_protection=true
+
+# AptX
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.bt.enableAptXHD=true
