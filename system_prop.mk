@@ -150,6 +150,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
 
+# Allow tethering without provisioning app
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.tethering.noprovisioning=true
+
 # Burn-in protection
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.systemui.burn_in_protection=true
