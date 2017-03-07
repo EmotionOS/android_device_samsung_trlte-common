@@ -25,4 +25,6 @@
 /* Enable A2DP sink */
 #define BTA_AV_SINK_INCLUDED TRUE
 
+#define BTA_DISABLE_DELAY 1000
+
 #endif
