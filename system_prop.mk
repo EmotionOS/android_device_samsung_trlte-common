@@ -116,6 +116,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.systemui.burn_in_protection=true
 
+# Timeout failed shutdowns
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.shutdown_timeout=5
+
 # AptX
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.bt.enableAptXHD=true
