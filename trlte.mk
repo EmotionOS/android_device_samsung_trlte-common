@@ -113,10 +113,9 @@ TARGET_BOOTANIMATION_HALF_RES := true
 	
 # Camera
 PRODUCT_PACKAGES += \
-    camera.apq8084 \
     libxml2 \
-    Snap
-
+    camera.apq8084
+        
 # FlipFlap
 PRODUCT_PACKAGES += \
     FlipFlap
