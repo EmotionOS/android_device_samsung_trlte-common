@@ -1374,9 +1374,12 @@ service imsqmidaemon /system/bin/imsqmidaemon
     socket ims_qmid stream 0660 system radio
     group radio net_raw log qcom_diag wakelock
 
+on property:sys.qseecomd.enabled=true
+    start imsqmidaemon
+
 service imsdatadaemon /system/bin/imsdatadaemon
     class main
-    user system
+    user root
     socket ims_datad stream 0660 system radio
     group system wifi radio inet net_raw log readproc qcom_diag net_admin
     disabled
@@ -1386,7 +1389,7 @@ on property:sys.ims.QMI_DAEMON_STATUS=1
 
 service ims_rtp_daemon /system/bin/ims_rtp_daemon
     class main
-    user system
+    user root
     socket ims_rtpd stream 0660 system radio
     group system radio net_raw inet log qcom_diag
     disabled
@@ -1415,6 +1418,10 @@ service atfwd /system/bin/ATFWD-daemon rmnet_mhi0
     class late_start
     user system
     group system radio
+
+service cnd /system/bin/cnd
+    class late_start
+    socket cnd stream 660 root inet
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
