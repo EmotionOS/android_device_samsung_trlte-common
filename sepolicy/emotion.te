@@ -56,8 +56,8 @@ allow rild system_data_file:sock_file { create setattr unlink };
 allow rild tee:file { getattr open read };
 allow rild ueventd:file { getattr open read };
 allow rild vold:file { getattr open read };
-allow rild persist_file:dir search; 
-allow rild radio:file read; 
+allow rild persist_file:dir search;
+allow rild radio:file read;
 allow rild system_data_file:dir write;
 
 #============= shell ==============
@@ -100,7 +100,7 @@ allow untrusted_app sysfs:file read;
 allow untrusted_app mnt_media_rw_file:dir getattr;
 
 #============= vcs ==============
-allow vcs ion_device:chr_file read; 
+allow vcs ion_device:chr_file read;
 allow vcs ion_device:chr_file open;
 allow vcs ion_device:chr_file ioctl;
 
@@ -149,3 +149,26 @@ allow isolated_app app_data_file:dir { getattr };
 allow isolated_app shell_data_file:dir { search };
 
 allow hostapd wpa_device:chr_file { read };
+
+#========== atfwd ===========
+allow atfwd diag_device:chr_file { open read write ioctl };
+allow atfwd ctl_default_prop:property_service set;
+
+allow ims smem_log_device:chr_file { open read write };
+
+#========== Bridge Manager (radio process) ============
+type bridge, domain, domain_deprecated;
+type bridge_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(bridge)
+
+# Uevent for usb connection
+allow bridge self:netlink_kobject_uevent_socket { create bind read };
+
+# Talk to qmuxd (qmux_radio)
+qmux_socket(bridge)
+
+# Alert the RmNet SMD & SDIO function driver of the correct transport.
+# (/sys/class/android_usb/f_rmnet_smd_sdio/transport)
+allow bridge sysfs_rmnet:file { open read write getattr };
