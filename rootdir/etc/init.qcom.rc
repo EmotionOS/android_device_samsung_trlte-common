@@ -93,8 +93,14 @@ on fs
     setprop persist.rmnet.mux enabled
     setprop persist.rmnet.data.enable true
     setprop persist.data.wda.enable true
+    setprop persist.data.df.dl_mode 5
+    setprop persist.data.df.ul_mode 5
     setprop persist.data.df.agg.dl_pkt 10
     setprop persist.data.df.agg.dl_size 4096
+    setprop persist.data.df.mux_count 8
+    setprop persist.data.df.iwlan_mux 9
+    setprop persist.data.df.dev_name rmnet_usb0
+    setprop persist.data.llf.enable true
 
     write /sys/kernel/boot_adsp/boot 1
     setprop qcom.audio.init complete
