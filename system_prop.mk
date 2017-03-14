@@ -37,7 +37,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.enable_vds \
     sdm.perf_hint_window=50 \
     ro.opengles.version=196608 \
-    
+
 # Enable Google Assistant
 PRODUCT_PROPERTY_OVERRIDES += \
    ro.opa.eligible_device=true
@@ -75,6 +75,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.nfc.sec_hal=true
 
+#Disable QC Oem Hook
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.oem_socket=false
+
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=true \
@@ -83,7 +87,35 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.lte_vrat_report=1 \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.net.doxlat=true \
-    ro.telephony.mms_data_profile=5
+    ro.telephony.mms_data_profile=5 \
+    persist.cne.feature=0 \
+	persist.cne.dpm=0 \
+	persist.dpm.feature=0 \
+    persist.radio.apm_mdm_not_pwdn=1 \
+    persist.eons.enabled=true \
+    persist.tcp.delack.enable=true \
+    persist.qcril_uim_vcc_feature=1
+
+# IMS/VoLTE
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.jbims=1 \
+    persist.radio.sib16_support=1 \
+    persist.radio.ignore_ims_wlan=1 \
+    persist.data.iwlan.enable=true \
+    persist.radio.ROTATION_ENABLE=1 \
+    persist.radio.VT_ENABLE=1 \
+    persist.radio.VT_HYBRID_ENABLE=1 \
+    persist.radio.VT_USE_MDM_TIME=0 \
+    persist.dbg.volte_avail_ovr=1 \
+    persist.dbg.vt_avail_ovr=1 \
+    persist.radio.lte_vrte_ltd=1 \
+    persist.radio.data_con_rprt=1 \
+    persist.radio.calls.on.ims=true \
+    persist.rcs.supported=0 \
+    persist.ims.disableADBLogs=0 \
+    persist.ims.disableDebugLogs=0 \
+    persist.ims.disableIMSLogs=0 \
+    persist.ims.disableQXDMLogs=0
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
