@@ -21,6 +21,7 @@ allow system_app vcs_device:fifo_file create_file_perms;
 # TimeKeep
 allow system_app time_data_file:dir { create_dir_perms search };
 allow system_app time_data_file:file create_file_perms;
-set_prop(system_app, timekeep_prop)
+#set_prop(system_app, timekeep_prop)
+allow system_app cne_service:service_manager add;
 
 # >neverallow< allow system_app netd_service:service_manager find;
