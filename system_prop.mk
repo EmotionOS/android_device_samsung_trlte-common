@@ -100,12 +100,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_mdm_not_pwdn=1 \
     persist.eons.enabled=true \
     persist.tcp.delack.enable=true \
-    persist.qcril_uim_vcc_feature=1
+    persist.qcril_uim_vcc_feature=1 \
+    persist.radio.sib16_support=0
 
 # IMS/VoLTE
 # PRODUCT_PROPERTY_OVERRIDES += \
 #    persist.radio.jbims=1 \
-#    persist.radio.sib16_support=1 \
 #    persist.radio.ignore_ims_wlan=1 \
 #    persist.data.iwlan.enable=true \
 #    persist.radio.ROTATION_ENABLE=1 \
