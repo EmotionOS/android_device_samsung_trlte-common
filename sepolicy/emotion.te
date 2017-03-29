@@ -99,11 +99,6 @@ allow untrusted_app cm_status_bar_service:service_manager find;
 allow untrusted_app sysfs:file read;
 allow untrusted_app mnt_media_rw_file:dir getattr;
 
-#============= vcs ==============
-allow vcs ion_device:chr_file read;
-allow vcs ion_device:chr_file open;
-allow vcs ion_device:chr_file ioctl;
-
 #============= rild ==============
 allow rild adsprpcd:file { getattr open read };
 allow rild debuggerd:file { getattr open read };
