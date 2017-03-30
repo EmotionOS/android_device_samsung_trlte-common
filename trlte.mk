@@ -139,13 +139,13 @@ PRODUCT_PACKAGES += \
    libhealthd.default
 
 # Fingerprint sensor
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     fingerprintd \
     fingerprint.apq8084 \
     ValidityService
 
-PRODUCT_PROPERTY_OVERRIDES += \
-fingerprint_enabled=1
+#PRODUCT_PROPERTY_OVERRIDES += \
+#fingerprint_enabled=1
 
 # Gello
 PRODUCT_PACKAGES += Gello
