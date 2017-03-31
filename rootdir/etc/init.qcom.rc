@@ -383,25 +383,20 @@ on property:ro.debuggable=1
     symlink /data/data/com.android.shell/files/bugreports /data/bugreports
 
     # Permissions for svc led
-    chown system system /sys/class/leds/green/brightness
-    chown system system /sys/class/leds/blue/brightness
-    chown system system /sys/class/leds/white/brightness
-    chown system system /sys/class/leds/lcd-backlight/brightness
-    chown system system /sys/class/sec/sec_touchkey/brightness
-    chown system system /sys/class/leds/green/blink
-    chown system system /sys/class/leds/blue/blink
-    chown system system /sys/class/leds/white/blink
-    chown system system /sys/class/leds/green/delay_on
-    chown system system /sys/class/leds/blue/delay_on
-    chown system system /sys/class/leds/white/delay_on
-    chown system system /sys/class/leds/green/delay_off
-    chown system system /sys/class/leds/blue/delay_off
-    chown system system /sys/class/leds/white/delay_off
+    chown system system /sys/class/sec/led/led_r
+    chown system system /sys/class/sec/led/led_g
+    chown system system /sys/class/sec/led/led_b
+    chown system system /sys/class/sec/led/led_pattern
+    chown system system /sys/class/sec/led/led_blink
+    chown system system /sys/class/sec/led/led_lowpower
 
     # IR_LED
     chown system radio /sys/class/sec/sec_ir/ir_send
     chown system radio /sys/class/sec/sec_ir/ir_send_result
     chown system system /dev/ice4_dev
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/blue/blink
     chmod 0660 /dev/ice4_dev
 
     chown system camera /sys/class/flash/flash/flash_power
@@ -857,6 +852,7 @@ on boot
    chown system radio /sys/class/camera/rear/rear_camfw
    chown system radio /sys/class/camera/rear/rear_camfw_full
    chown system radio /sys/class/camera/rear/rear_camfw_load
+   chown system radio /sys/class/camera/rear/rear_latest_module_check
    chown system radio /sys/class/camera/rear/rear_camtype
    chown system radio /sys/class/camera/rear/rear_corever
    chown system radio /sys/class/camera/rear/rear_companionfw_full
@@ -1319,15 +1315,12 @@ service sensorhubservice /system/bin/sensorhubservice
     group input
 
 service thermal-engine /system/vendor/bin/thermal-engine
-    class main
-    user root
-    socket thermal-send-client stream 0666 system system
-    socket thermal-recv-client stream 0660 system system
-    socket thermal-recv-passive-client stream 0666 system system
-    group root system readproc wakelock
-    socket thermal-send-client stream 0666 system system
-    socket thermal-recv-client stream 0660 system system
-    socket thermal-recv-passive-client stream 0666 system system
+      class main
+      user root
+      socket thermal-send-client stream 0666 system system
+      socket thermal-recv-client stream 0660 system system
+      socket thermal-recv-passive-client stream 0666 system system
+      group root
 
 service time_daemon /system/bin/time_daemon
     class main
@@ -1479,6 +1472,8 @@ service loc_launcher /system/bin/loc_launcher
     group gps inet net_raw diag net_admin wifi
 
 on property:init.svc.macloader=stopped
+    chown system root /data/.cid.info
+    chmod 0664 /data/.cid.info
     chown system root /data/.rev
     chmod 0664 /data/.rev
 # end of wifi
