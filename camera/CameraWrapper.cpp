@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2016, The CyanogenMod Project
- *           (C) 2017, The LineageOS Project
+ * Copyright (C) 2012-2016, The CyanogenMod Project
+ * Copyright (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ camera_module_t HAL_MODULE_INFO_SYM = {
          .module_api_version = CAMERA_MODULE_API_VERSION_1_0,
          .hal_api_version = HARDWARE_HAL_API_VERSION,
          .id = CAMERA_HARDWARE_MODULE_ID,
-         .name = "trlte Camera Wrapper",
+         .name = "APQ8084 Camera Wrapper",
          .author = "The LineageOS Project",
          .methods = &camera_module_methods,
          .dso = NULL,
@@ -197,6 +197,8 @@ static char *camera_fixup_setparams(int id, const char *settings)
             params.set(CameraParameters::KEY_ZSL, CameraParameters::ZSL_ON);
         }
     }
+
+    params.set(CameraParameters::KEY_PREVIEW_FPS_RANGE, "7500,30000");
 
     ALOGV("%s: Fixed parameters:", __FUNCTION__);
     params.dump();
