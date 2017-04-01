@@ -1287,10 +1287,10 @@ service adsprpcd /system/bin/adsprpcd
     user media
     group media
 
-#service fingerprintd /system/bin/fingerprintd
-#    class late_start
-#    user system
-#    group input
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group input
 
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class main
@@ -1687,10 +1687,10 @@ service hcidump /system/bin/sh /system/etc/hcidump.sh
     oneshot
 
 # SENSOR FRAMEWORK : starts fingerprintService
-#service vcsFPService /system/bin/vcsFPService
-#    class late_start
-#    user system
-#    group system
+service vcsFPService /system/bin/vcsFPService
+    class late_start
+    user system
+    group system
 
 on property:persist.sys.ssr.restart_level=1
     write /sys/module/subsystem_restart/parameters/restart_level 1
